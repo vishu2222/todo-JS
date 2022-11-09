@@ -1,5 +1,6 @@
+
 const todosArr = []
-let count = 1
+let count = 0
 
 const button = document.getElementById('submitTodo')
 button.addEventListener('click', (event) => {
@@ -29,15 +30,14 @@ function addTodo (todo, containerDiv) {
   const notes = addNotes()
   const date = addDate()
   const priority = addPriority()
-
-  const priorityList = document.createElement('datalist')
+  const delButton = addDelButton()
 
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
   itemDiv.appendChild(notes)
   itemDiv.appendChild(date)
   itemDiv.appendChild(priority)
-  itemDiv.appendChild(priorityList)
+  itemDiv.appendChild(delButton)
 
   containerDiv.appendChild(itemDiv)
 }
@@ -65,7 +65,7 @@ function addNotes () {
   const notes = document.createElement('input')
   notes.setAttribute('type', 'textarea')
   notes.setAttribute('rows', 20)
-  notes.setAttribute('value', 'Notes')
+  notes.setAttribute('placeholder', 'Notes')
   return notes
 }
 
@@ -86,4 +86,11 @@ function addPriority () {
     priority.appendChild(option)
   })
   return priority
+}
+
+function addDelButton () {
+  const delButton = document.createElement('button')
+  delButton.setAttribute('id', 'delTodo')
+  delButton.setAttribute('textContent', 'delete')
+  return delButton
 }
