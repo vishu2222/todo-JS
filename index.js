@@ -4,8 +4,9 @@ let count = 1
 const button = document.getElementById('submitTodo')
 button.addEventListener('click', (event) => {
   const text = document.getElementById('inputTxt') // input todo text
-  // todoTextArr.push({ id: count, txt: text.value })
-  todoTextArr.push(text.value)
+  todoTextArr.push({ id: count, txt: text.value })
+  count++
+  // todoTextArr.push(text.value)
   text.value = '' // clearing input entry or a todo
   displayTodos()
   event.preventDefault() // disable default actions if the event is not explicitely handled. // Clicking on a "Submit" button, prevent it from submitting a form
@@ -15,11 +16,12 @@ function displayTodos () {
   const containerDiv = document.createElement('div')
   containerDiv.setAttribute('class', 'container')
 
-  todoTextArr.forEach(todoText => {
+  todoTextArr.forEach(todo => {
     const itemDiv = document.createElement('div')
+    itemDiv.setAttribute('id', todo.id)
     const itemInput = document.createElement('input')
     itemInput.setAttribute('type', 'text')
-    itemInput.setAttribute('value', todoText)
+    itemInput.setAttribute('value', todo.txt)
     itemDiv.appendChild(itemInput)
     containerDiv.appendChild(itemDiv)
   })
