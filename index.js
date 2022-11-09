@@ -12,21 +12,23 @@ button.addEventListener('click', (event) => {
 })
 
 function displayTodos () {
-  const containerDiv = document.createElement('div')
+  const containerDiv = document.createElement('div') // container div for todos
   containerDiv.setAttribute('class', 'container')
-
   todosArr.forEach(todo => {
-    const itemDiv = document.createElement('div')
-    itemDiv.setAttribute('id', todo.id)
-    const itemInput = document.createElement('input')
-    itemInput.setAttribute('type', 'text')
-    itemInput.setAttribute('value', todo.txt)
-    itemDiv.appendChild(itemInput)
-    containerDiv.appendChild(itemDiv)
+    addTodo(todo, containerDiv)
   })
 
   const todoDiv = document.querySelector('.todos') // div todo's
-  todoDiv.removeChild(todoDiv.firstChild)
+  todoDiv.removeChild(todoDiv.firstChild) // remove todo containerDiv if exists already
   todoDiv.appendChild(containerDiv)
 }
 
+function addTodo (todo, containerDiv) {
+  const itemDiv = document.createElement('div')
+  itemDiv.setAttribute('id', todo.id)
+  const itemInput = document.createElement('input')
+  itemInput.setAttribute('type', 'text')
+  itemInput.setAttribute('value', todo.txt)
+  itemDiv.appendChild(itemInput)
+  containerDiv.appendChild(itemDiv)
+}
