@@ -1,7 +1,7 @@
 
 let todosArr = []
 let count = 0
-
+ 
 const button = document.getElementById('submitTodo')
 button.addEventListener('click', (event) => {
   const text = document.getElementById('inputTxt') // input todo text
