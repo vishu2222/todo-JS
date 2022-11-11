@@ -1,6 +1,15 @@
 
-let todosArr = []
-let count = 0
+let todosArr
+let count
+
+try {
+  todosArr = JSON.parse(localStorage.getItem('todosArr'))
+  count = todosArr.reduce((maxId, i) => { if (i.id > maxId) { maxId = i.id } return maxId }, 0)
+  displayTodos()
+} catch (e) {
+  todosArr = []
+  count = 0
+}
 
 const button = document.getElementById('submitTodo')
 button.addEventListener('click', (event) => {
@@ -10,9 +19,14 @@ button.addEventListener('click', (event) => {
     count++
     text.value = '' // clearing input entry after a submit
     displayTodos()
+    updateLocalStorage()
   }
   event.preventDefault() // disable default actions(form) if the event is not explicitely handled. // Clicking on a "Submit" button, prevent it from submitting a form
 })
+
+function updateLocalStorage () {
+  localStorage.setItem('todosArr', JSON.stringify(todosArr))
+}
 
 function displayTodos () {
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
@@ -44,11 +58,14 @@ function makeItemDiv (todo) {
 
 function addCheckBox (todo) {
   const checkBox = document.createElement('input')
-  checkBox.type = 'checkbox' // checkBox.setAttribute('type', 'checkbox') 
-  todo.checkBox = checkBox.checked
+  checkBox.type = 'checkbox'
+  if (todo.checkBox) { checkBox.checked = todo.checkBox } // if todo.checkBox !== undefined
+
   checkBox.addEventListener('change', () => {
     todo.checkBox = checkBox.checked
+    updateLocalStorage()
   })
+
   return checkBox
 }
 
@@ -58,6 +75,7 @@ function addTextInput (todo) {
   itemInput.value = todo.txt
   itemInput.addEventListener('change', () => {
     todo.txt = itemInput.value
+    updateLocalStorage()
   })
   return itemInput
 }
@@ -66,34 +84,42 @@ function addNotes (todo) {
   const notes = document.createElement('input')
   notes.type = 'textarea'
   notes.placeholder = 'Notes'
-  todo.notes = notes.value
+  if (todo.notes !== undefined) { notes.value = todo.notes }
+
   notes.addEventListener('change', () => {
     todo.notes = notes.value
+    updateLocalStorage()
   })
+
   return notes
 }
 
 function addDate (todo) {
   const date = document.createElement('input')
-  date.type = 'date' // date.valueAsDate = new Date()
-  todo.date = date.value
+  date.type = 'date'
+  if (todo.date !== undefined) { date.value = todo.date } // else { date.valueAsDate = new Date() }
+
   date.addEventListener('change', () => {
     todo.date = date.value
+    updateLocalStorage()
   })
   return date
 }
 
 function addPriority (todo) {
   const priority = document.createElement('select') // priority.id = 'priority' + String(todo.id) // priority.class = 'priority'
-  todo.priority = priority.value
+
   const priorityOptions = ['Low', 'Medium', 'High']
   priorityOptions.forEach(p => {
     const option = document.createElement('option')
     option.textContent = p
     priority.appendChild(option)
   })
+  if (todo.priority !== undefined) { priority.value = todo.priority }
+
   priority.addEventListener('change', () => {
     todo.priority = priority.value
+    updateLocalStorage()
   })
   return priority
 }
@@ -106,19 +132,7 @@ function addDelButton (todo) {
   delButton.addEventListener('click', () => {
     document.getElementById(id).remove()
     todosArr = todosArr.filter(item => item.id !== id)
+    updateLocalStorage()
   })
   return delButton
 }
-
-// function addUpdateButton (todo) {
-//   const updateButton = document.createElement('button')
-//   updateButton.textContent = 'Update'
-//   const id = todo.id
-
-//   updateButton.addEventListener('click', () => {
-//     // todo.checkBox =
-//   })
-
-//   return updateButton
-// }
-
