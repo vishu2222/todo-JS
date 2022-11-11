@@ -1,22 +1,21 @@
-
 let todosArr
-let count
+let todoID
 
 try {
-  todosArr = JSON.parse(localStorage.getItem('todosArr'))
-  count = todosArr.reduce((maxId, i) => { if (i.id > maxId) { maxId = i.id } return maxId }, 0)
+  todosArr = JSON.parse(window.localStorage.getItem('todosArr'))
+  todoID = todosArr.reduce((maxId, i) => { if (i.id > maxId) { maxId = i.id } return maxId }, 0) + 1
   displayTodos()
 } catch (e) {
   todosArr = []
-  count = 0
+  todoID = 0
 }
 
 const button = document.getElementById('submitTodo')
 button.addEventListener('click', (event) => {
   const text = document.getElementById('inputTxt') // input todo text
   if (text.value.length !== 0) {
-    todosArr.push({ id: count, txt: text.value })
-    count++
+    todosArr.push({ id: todoID, txt: text.value })
+    todoID++
     text.value = '' // clearing input entry after a submit
     displayTodos()
     updateLocalStorage()
@@ -25,7 +24,7 @@ button.addEventListener('click', (event) => {
 })
 
 function updateLocalStorage () {
-  localStorage.setItem('todosArr', JSON.stringify(todosArr))
+  window.localStorage.setItem('todosArr', JSON.stringify(todosArr))
 }
 
 function displayTodos () {
@@ -136,3 +135,4 @@ function addDelButton (todo) {
   })
   return delButton
 }
+// localStorage.removeItem('todosArr')
