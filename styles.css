@@ -1,9 +1,22 @@
 body {
- background-color: #EAF6F6;
-
+  background-color: #68A7AD;
 }
 
-/* .form {
-    margin-left: 100px;
-    background-color: aqua;
-} */
+.form {
+    margin-left: 300px;
+    margin-bottom: 20px;
+    /* background-color: aqua; */
+}
+
+#todo {
+    padding-left: 140px;
+    font-size: large;
+}
+
+#inputTxt {
+    width: 300px;
+}
+
+.todoItem {
+    margin-left: 250px;
+}
