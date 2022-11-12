@@ -13,14 +13,15 @@ try {
 const button = document.getElementById('submitTodo')
 button.addEventListener('click', (event) => {
   const text = document.getElementById('inputTxt') // input todo text
+  event.preventDefault() // disable default actions(form) if the event is not explicitely handled. // Clicking on a "Submit" button, prevent it from submitting a form
   if (text.value.length !== 0) {
     todosArr.push({ id: todoID, txt: text.value })
     todoID++
     text.value = '' // clearing input entry after a submit
+
     displayTodos()
     updateLocalStorage()
   }
-  event.preventDefault() // disable default actions(form) if the event is not explicitely handled. // Clicking on a "Submit" button, prevent it from submitting a form
 })
 
 function updateLocalStorage () {
@@ -30,29 +31,58 @@ function updateLocalStorage () {
 function displayTodos () {
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
   todoContainer.textContent = '' // replace all existing childern in todoContainer div with single textnode
-  todosArr.forEach(todo => { todoContainer.appendChild(makeItemDiv(todo)) })
+  todosArr.forEach(todo => {
+    todoContainer.appendChild(makeItemDiv(todo))
+  })
 }
 
 function makeItemDiv (todo) {
   const itemDiv = document.createElement('div')
+  itemDiv.style = 'background-color: #C4D7E0;margin-right: 250px;margin-bottom: 2px;'
   itemDiv.id = todo.id
   itemDiv.className = 'todoItem'
 
-  const checkBox = addCheckBox(todo)
   const textInput = addTextInput(todo)
-  const notes = addNotes(todo)
-  const date = addDate(todo)
-  const priority = addPriority(todo)
-  const delButton = addDelButton(todo)
+  const checkBox = addCheckBox(todo)
+  const propertiesDiv = makePropertiesDiv(todo)
 
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
-  itemDiv.appendChild(notes)
-  itemDiv.appendChild(date)
-  itemDiv.appendChild(priority)
-  itemDiv.appendChild(delButton)
+  itemDiv.appendChild(propertiesDiv)
+  itemDiv.appendChild(document.createElement('br'))
 
+  itemDiv.addEventListener('click', (event) => {
+    const element = event.target.tagName
+    if (element === 'INPUT' || element === 'SELECT') { return }
+    if (propertiesDiv.style.display === 'none') {
+      propertiesDiv.style.display = 'block'
+    } else { propertiesDiv.style.display = 'none' }
+  })
   return itemDiv
+}
+
+// function addDateLabel (todo) {
+//   const dateLabel = document.createElement('label')
+//   dateLabel.setAttribute('for', todo.date.id)
+//   dateLabel.textContent = 'Due Date'
+// }
+
+function makePropertiesDiv (todo) {
+  const notes = addNotes(todo)
+  const date = addDate(todo)
+  // const dateLabel = addDateLabel(todo)
+  const priority = addPriority(todo)
+  const delButton = addDelButton(todo)
+
+  const propertiesDiv = document.createElement('div')
+  propertiesDiv.className = 'classPropertyDiv'
+  propertiesDiv.style.display = 'none'
+  propertiesDiv.appendChild(notes)
+  propertiesDiv.appendChild(date)
+  propertiesDiv.appendChild(priority)
+  propertiesDiv.appendChild(delButton)
+
+  return propertiesDiv
 }
 
 function addCheckBox (todo) {
@@ -72,6 +102,8 @@ function addTextInput (todo) {
   const itemInput = document.createElement('input')
   itemInput.type = 'text'
   itemInput.value = todo.txt
+  itemInput.style = ' margin-bottom: 3px; margin-top: 3px;'
+
   itemInput.addEventListener('change', () => {
     todo.txt = itemInput.value
     updateLocalStorage()
@@ -83,6 +115,8 @@ function addNotes (todo) {
   const notes = document.createElement('input')
   notes.type = 'textarea'
   notes.placeholder = 'Notes'
+  notes.style = 'margin-left: 20px; height: 150px;'
+
   if (todo.notes !== undefined) { notes.value = todo.notes }
 
   notes.addEventListener('change', () => {
@@ -96,6 +130,11 @@ function addNotes (todo) {
 function addDate (todo) {
   const date = document.createElement('input')
   date.type = 'date'
+  date.className = 'dateClass'
+  date.id = 'date' + String(todo.id)
+
+  // date.style = 'position: absolute;right: 100px;'
+
   if (todo.date !== undefined) { date.value = todo.date } // else { date.valueAsDate = new Date() }
 
   date.addEventListener('change', () => {
