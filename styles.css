@@ -19,6 +19,7 @@ body {
 
 .todoItem {
     margin-left: 250px;
+    border-radius: 8px;
 }
 
 .delTodo:hover { /* psuedo class hover  */
