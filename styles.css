@@ -20,3 +20,8 @@ body {
 .todoItem {
     margin-left: 250px;
 }
+
+.delTodo:hover { /* psuedo class hover  */
+    background-color: #F7A4A4;
+}
+/*  */
