@@ -61,28 +61,29 @@ function makeItemDiv (todo) {
   return itemDiv
 }
 
-// function addDateLabel (todo) {
-//   const dateLabel = document.createElement('Label')
-//   console.log(todo)
-//   dateLabel.setAttribute('for', todo.date.id)
-//   dateLabel.innerHTML = 'Due Date'
-//   return dateLabel
-// }
+function addPriorityLabel (todo) {
+  const priorityLabel = document.createElement('Label')
+  priorityLabel.setAttribute('for', todo.priority.id)
+  priorityLabel.innerHTML = ' Priority: '
+  return priorityLabel
+}
 
 function makePropertiesDiv (todo) {
   const notes = addNotes(todo)
   const date = addDate(todo)
-  // const dateLabel = addDateLabel(todo)
-  // console.log('dateLabel', dateLabel)
+  const dateLabel = addDateLabel(todo)
   const priority = addPriority(todo)
+  const priorityLabel = addPriorityLabel(todo)
   const delButton = addDelButton(todo)
 
   const propertiesDiv = document.createElement('div')
   propertiesDiv.className = 'classPropertyDiv'
   propertiesDiv.style.display = 'none'
   propertiesDiv.appendChild(notes)
-  // propertiesDiv.appendChild(dateLabel)
+  propertiesDiv.appendChild(dateLabel)
   propertiesDiv.appendChild(date)
+  // propertiesDiv.appendChild(document.createElement('br'))
+  propertiesDiv.appendChild(priorityLabel)
   propertiesDiv.appendChild(priority)
   propertiesDiv.appendChild(delButton)
 
@@ -136,31 +137,42 @@ function addNotes (todo) {
   return notes
 }
 
+function addDateLabel (todo) {
+  const dateLabel = document.createElement('Label')
+  dateLabel.setAttribute('for', todo.date.id)
+  dateLabel.textContent = ' Due Date: '
+  return dateLabel
+}
+
 function addDate (todo) {
   const date = document.createElement('input')
   date.type = 'date'
   date.className = 'dateClass'
   date.id = 'date' + String(todo.id)
 
-  if (todo.date !== undefined) { date.value = todo.date } // else { date.valueAsDate = new Date() }
+  if (todo.date !== undefined) { date.value = todo.date }
+  else { date.valueAsDate = new Date(); todo.date = date.value }
 
   date.addEventListener('change', () => {
     todo.date = date.value
     updateLocalStorage()
   })
+
   return date
 }
 
 function addPriority (todo) {
-  const priority = document.createElement('select') // priority.id = 'priority' + String(todo.id) // priority.class = 'priority'  
+  const priority = document.createElement('select') // priority.class = 'priority'
+  priority.id = 'priority' + String(todo.id)
 
-  const priorityOptions = ['Low', 'Medium', 'High']
+  const priorityOptions = ['None', 'Low', 'Medium', 'High']
   priorityOptions.forEach(p => {
     const option = document.createElement('option')
     option.textContent = p
     priority.appendChild(option)
   })
   if (todo.priority !== undefined) { priority.value = todo.priority }
+  else { priority.value = 'None'; todo.priority = priority.value }
 
   priority.addEventListener('change', () => {
     todo.priority = priority.value
