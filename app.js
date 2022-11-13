@@ -152,8 +152,12 @@ function addDate (todo) {
   date.className = 'dateClass'
   date.id = 'date' + String(todo.id)
 
-  if (todo.date !== undefined) { date.value = todo.date }
-  else { date.valueAsDate = new Date(); todo.date = date.value }
+  if (todo.date !== undefined) {
+    date.value = todo.date
+  } else {
+    date.valueAsDate = new Date()
+    todo.date = date.value
+  }
 
   date.addEventListener('change', () => {
     todo.date = date.value
@@ -173,8 +177,12 @@ function addPriority (todo) {
     option.textContent = p
     priority.appendChild(option)
   })
-  if (todo.priority !== undefined) { priority.value = todo.priority }
-  else { priority.value = 'None'; todo.priority = priority.value }
+  if (todo.priority !== undefined) {
+    priority.value = todo.priority
+  } else {
+    priority.value = 'None'
+    todo.priority = priority.value
+  }
 
   priority.addEventListener('change', () => {
     todo.priority = priority.value
