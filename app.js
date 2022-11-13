@@ -38,16 +38,18 @@ function displayTodos () {
 
 function makeItemDiv (todo) {
   const itemDiv = document.createElement('div')
-  itemDiv.style = 'background-color: #C4D7E0;margin-right: 250px;margin-bottom: 2px;'
+  itemDiv.style = 'background-color: #C4D7E0;margin-right: 350px;margin-bottom: 2px;'
   itemDiv.id = todo.id
   itemDiv.className = 'todoItem'
 
   const textInput = addTextInput(todo)
   const checkBox = addCheckBox(todo)
   const propertiesDiv = makePropertiesDiv(todo)
+  const delButton = addDelButton(todo)
 
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
+  itemDiv.appendChild(delButton)
   itemDiv.appendChild(propertiesDiv)
   itemDiv.appendChild(document.createElement('br'))
 
@@ -74,7 +76,7 @@ function makePropertiesDiv (todo) {
   const dateLabel = addDateLabel(todo)
   const priority = addPriority(todo)
   const priorityLabel = addPriorityLabel(todo)
-  const delButton = addDelButton(todo)
+  // const delButton = addDelButton(todo)
 
   const propertiesDiv = document.createElement('div')
   propertiesDiv.className = 'classPropertyDiv'
@@ -82,10 +84,10 @@ function makePropertiesDiv (todo) {
   propertiesDiv.appendChild(notes)
   propertiesDiv.appendChild(dateLabel)
   propertiesDiv.appendChild(date)
-  // propertiesDiv.appendChild(document.createElement('br'))
+  propertiesDiv.appendChild(document.createElement('br'))
   propertiesDiv.appendChild(priorityLabel)
   propertiesDiv.appendChild(priority)
-  propertiesDiv.appendChild(delButton)
+  // propertiesDiv.appendChild(delButton)
 
   return propertiesDiv
 }
@@ -185,6 +187,7 @@ function addDelButton (todo) {
   const delButton = document.createElement('button')
   delButton.className = 'delTodo' // delButton.id = 'delTodo' + String(todo.id)
   delButton.textContent = 'Delete' // delButton.setAttribute('textContent', 'Delete') didnt work?
+  delButton.style = 'margin-left: 230px;'
   const id = todo.id
 
   delButton.addEventListener('click', () => {
