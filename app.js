@@ -52,7 +52,7 @@ function makeItemDiv (todo) {
   itemDiv.appendChild(document.createElement('br'))
 
   itemDiv.addEventListener('click', (event) => {
-    const element = event.target.tagName
+    const element = event.target.tagName // html element box corresponding to the click event
     if (element === 'INPUT' || element === 'SELECT') { return }
     if (propertiesDiv.style.display === 'none') {
       propertiesDiv.style.display = 'block'
@@ -62,15 +62,18 @@ function makeItemDiv (todo) {
 }
 
 // function addDateLabel (todo) {
-//   const dateLabel = document.createElement('label')
+//   const dateLabel = document.createElement('Label')
+//   console.log(todo)
 //   dateLabel.setAttribute('for', todo.date.id)
-//   dateLabel.textContent = 'Due Date'
+//   dateLabel.innerHTML = 'Due Date'
+//   return dateLabel
 // }
 
 function makePropertiesDiv (todo) {
   const notes = addNotes(todo)
   const date = addDate(todo)
   // const dateLabel = addDateLabel(todo)
+  // console.log('dateLabel', dateLabel)
   const priority = addPriority(todo)
   const delButton = addDelButton(todo)
 
@@ -78,6 +81,7 @@ function makePropertiesDiv (todo) {
   propertiesDiv.className = 'classPropertyDiv'
   propertiesDiv.style.display = 'none'
   propertiesDiv.appendChild(notes)
+  // propertiesDiv.appendChild(dateLabel)
   propertiesDiv.appendChild(date)
   propertiesDiv.appendChild(priority)
   propertiesDiv.appendChild(delButton)
@@ -88,10 +92,14 @@ function makePropertiesDiv (todo) {
 function addCheckBox (todo) {
   const checkBox = document.createElement('input')
   checkBox.type = 'checkbox'
-  if (todo.checkBox) { checkBox.checked = todo.checkBox } // if todo.checkBox !== undefined
+  if (todo.checkBox) { checkBox.checked = todo.checkBox } // else { todo.checkBox = checkBox.checked }
 
   checkBox.addEventListener('change', () => {
     todo.checkBox = checkBox.checked
+    const txtElement = document.getElementById('itemInput' + String(todo.id))
+    if (todo.checkBox === true) {
+      txtElement.style.textDecoration = 'line-through'
+    } else { txtElement.style.textDecoration = 'none' }
     updateLocalStorage()
   })
 
@@ -100,9 +108,10 @@ function addCheckBox (todo) {
 
 function addTextInput (todo) {
   const itemInput = document.createElement('input')
+  itemInput.id = 'itemInput' + String(todo.id)
   itemInput.type = 'text'
   itemInput.value = todo.txt
-  itemInput.style = ' margin-bottom: 3px; margin-top: 3px;'
+  itemInput.style = 'margin-bottom: 3px; margin-top: 3px;'
 
   itemInput.addEventListener('change', () => {
     todo.txt = itemInput.value
@@ -133,8 +142,6 @@ function addDate (todo) {
   date.className = 'dateClass'
   date.id = 'date' + String(todo.id)
 
-  // date.style = 'position: absolute;right: 100px;'
-
   if (todo.date !== undefined) { date.value = todo.date } // else { date.valueAsDate = new Date() }
 
   date.addEventListener('change', () => {
@@ -145,7 +152,7 @@ function addDate (todo) {
 }
 
 function addPriority (todo) {
-  const priority = document.createElement('select') // priority.id = 'priority' + String(todo.id) // priority.class = 'priority'
+  const priority = document.createElement('select') // priority.id = 'priority' + String(todo.id) // priority.class = 'priority'  
 
   const priorityOptions = ['Low', 'Medium', 'High']
   priorityOptions.forEach(p => {
@@ -163,7 +170,8 @@ function addPriority (todo) {
 }
 
 function addDelButton (todo) {
-  const delButton = document.createElement('button') // delButton.className = 'delTodo' // delButton.id = 'delTodo' + String(todo.id)
+  const delButton = document.createElement('button')
+  delButton.className = 'delTodo' // delButton.id = 'delTodo' + String(todo.id)
   delButton.textContent = 'Delete' // delButton.setAttribute('textContent', 'Delete') didnt work?
   const id = todo.id
 
@@ -172,6 +180,7 @@ function addDelButton (todo) {
     todosArr = todosArr.filter(item => item.id !== id)
     updateLocalStorage()
   })
+
   return delButton
 }
 // localStorage.removeItem('todosArr')
