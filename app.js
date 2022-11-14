@@ -50,7 +50,7 @@ function makeItemDiv (todo) {
 
   itemDiv.addEventListener('click', (event) => {
     const element = event.target.tagName // html element box corresponding to the click event
-    if (element === 'INPUT' || element === 'SELECT') { return }
+    if (element === 'TEXTAREA' || element === 'SELECT') { return }
     if (propertiesDiv.style.display === 'none') {
       propertiesDiv.style.display = 'block'
     } else { propertiesDiv.style.display = 'none' }
@@ -72,7 +72,7 @@ function makePropertiesDiv (todo) {
   propertiesDiv.appendChild(notes)
   propertiesDiv.appendChild(dateLabel)
   propertiesDiv.appendChild(date)
-  propertiesDiv.appendChild(document.createElement('br'))
+  // propertiesDiv.appendChild(document.createElement('br'))
   propertiesDiv.appendChild(priorityLabel)
   propertiesDiv.appendChild(priority)
   propertiesDiv.appendChild(delButton)
@@ -112,11 +112,9 @@ function addTextInput (todo) {
 }
 
 function addNotes (todo) {
-  const notes = document.createElement('input')
-  notes.type = 'textarea'
-  // const notes = document.createElement('textarea')
+  const notes = document.createElement('textarea')
   notes.placeholder = 'Notes'
-  notes.style = 'margin-left: 20px; height: 150px;'
+  notes.className = 'notes'
   // notes.style.display = 'inline-block'
 
   if (todo.notes !== undefined) { notes.value = todo.notes }
@@ -130,10 +128,10 @@ function addNotes (todo) {
 }
 
 function addDateLabel (todo) {
-  const dateLabel = document.createElement('Label')
+  const dateLabel = document.createElement('label')
+  dateLabel.className = 'ClassDateLabel'
   dateLabel.setAttribute('for', 'date' + String(todo.id))
   dateLabel.textContent = ' Due Date: '
-  dateLabel.style = 'margin-left: 45px;'
   return dateLabel
 }
 
@@ -159,10 +157,11 @@ function addDate (todo) {
 }
 
 function addPriorityLabel (todo) {
-  const priorityLabel = document.createElement('Label')
+  const priorityLabel = document.createElement('label')
+  priorityLabel.className = 'classPriorityLabel'
   priorityLabel.setAttribute('for', 'priority' + String(todo.id))
   priorityLabel.innerHTML = ' Priority: '
-  priorityLabel.style = 'margin-left: 230px;'
+
   return priorityLabel
 }
 

@@ -30,10 +30,30 @@ body {
 }
 
 .ClassItemInput {
-    background-color: #d6e1e6; /*  #C4D7E0; */
-    border: 0px;
+    background-color: #C4D7E0; 
+    border: 1px;
     margin-bottom: 3px;
     margin-top: 3px;
 }
+
+.ClassItemInput:hover {
+    border:groove; /* ridge */
+    border-radius: 8px;
+}
+
+.notes {
+    margin-left: 20px;
+    height: 150px;
+}
+
+/* .ClassDateLabel {
+    margin-left: 45px;
+} */
+
+/* .classPriorityLabel {
+    margin-left: 230px;
+} */
+
+
 
 /*  */
