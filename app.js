@@ -42,9 +42,11 @@ function makeItemDiv (todo) {
   const textInput = addTextInput(todo)
   const checkBox = addCheckBox(todo)
   const propertiesDiv = makePropertiesDiv(todo)
+  const dropDown = addTextNode(todo)
 
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
+  itemDiv.appendChild(dropDown)
   itemDiv.appendChild(propertiesDiv)
 
   itemDiv.addEventListener('click', (event) => {
@@ -55,6 +57,12 @@ function makeItemDiv (todo) {
     } else { propertiesDiv.style.display = 'none' }
   })
   return itemDiv
+}
+
+function addTextNode (todo) {
+  const dropDown = document.createTextNode('⬇️') // ⬇
+  dropDown.className = 'dropDown'
+  return dropDown
 }
 
 function makePropertiesDiv (todo) {
