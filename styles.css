@@ -25,9 +25,11 @@ body {
     margin-bottom: 2px;
 }
 
-/* .delTodo {
-    margin-left: 230px;
-} */
+.delTodo {
+    position: relative;
+    left: 250px;
+    bottom: 80px;
+}
 
 .delTodo:hover { /* psuedo class hover  */
     background-color: #F7A4A4;
@@ -48,15 +50,33 @@ body {
 .notes {
     margin-left: 20px;
     height: 150px;
+    display: inline-block;
 }
 
-/* .ClassDateLabel {
-    margin-left: 45px;
-} */
+.ClassDateLabel {
+    position: relative;
+    bottom: 130px;
+    left: 50px;
+}
 
-/* .classPriorityLabel {
-    margin-left: 230px;
-} */
+.dateClass {
+    position: relative;
+    bottom: 130px;
+    left: 50px;
+}
+
+.classPriorityLabel {
+    position: relative;
+    bottom: 100px;
+    right: 145px;
+}
+
+.classPriority {
+    position: relative;
+    bottom: 120px;
+    left: 310px;
+}
+
 
 
 
