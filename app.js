@@ -177,9 +177,6 @@ function addPriority (todo) {
   })
   if (todo.priority !== undefined) {
     priority.value = todo.priority
-  } else {
-    priority.value = 'None'
-    todo.priority = priority.value
   }
 
   priority.addEventListener('change', () => {
