@@ -28,4 +28,12 @@ body {
 .delTodo:hover { /* psuedo class hover  */
     background-color: #F7A4A4;
 }
+
+.ClassItemInput {
+    background-color: #d6e1e6; /*  #C4D7E0; */
+    border: 0px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
 /*  */

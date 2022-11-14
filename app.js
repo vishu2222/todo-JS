@@ -42,11 +42,9 @@ function makeItemDiv (todo) {
   const textInput = addTextInput(todo)
   const checkBox = addCheckBox(todo)
   const propertiesDiv = makePropertiesDiv(todo)
-  // const delButton = addDelButton(todo)
 
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
-  // itemDiv.appendChild(delButton)
   itemDiv.appendChild(propertiesDiv)
   itemDiv.appendChild(document.createElement('br'))
 
@@ -102,9 +100,9 @@ function addCheckBox (todo) {
 function addTextInput (todo) {
   const itemInput = document.createElement('input')
   itemInput.id = 'itemInput' + String(todo.id)
+  itemInput.className = 'ClassItemInput'
   itemInput.type = 'text'
   itemInput.value = todo.txt
-  itemInput.style = 'margin-bottom: 3px; margin-top: 3px;'
 
   itemInput.addEventListener('change', () => {
     todo.txt = itemInput.value
