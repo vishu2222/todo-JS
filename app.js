@@ -79,7 +79,6 @@ function makePropertiesDiv (todo) {
   propertiesDiv.appendChild(notes)
   propertiesDiv.appendChild(dateLabel)
   propertiesDiv.appendChild(date)
-  // propertiesDiv.appendChild(document.createElement('br'))
   propertiesDiv.appendChild(priorityLabel)
   propertiesDiv.appendChild(priority)
   propertiesDiv.appendChild(delButton)
