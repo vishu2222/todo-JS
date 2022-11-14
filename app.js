@@ -36,7 +36,6 @@ function displayTodos () {
 
 function makeItemDiv (todo) {
   const itemDiv = document.createElement('div')
-  itemDiv.style = 'background-color: #C4D7E0;margin-right: 350px;margin-bottom: 2px;'
   itemDiv.id = todo.id
   itemDiv.className = 'todoItem'
 
