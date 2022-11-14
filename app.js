@@ -46,11 +46,10 @@ function makeItemDiv (todo) {
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
   itemDiv.appendChild(propertiesDiv)
-  itemDiv.appendChild(document.createElement('br'))
 
   itemDiv.addEventListener('click', (event) => {
     const element = event.target.tagName // html element box corresponding to the click event
-    if (element === 'TEXTAREA' || element === 'SELECT') { return }
+    if (element === 'TEXTAREA' || element === 'SELECT' || element === 'INPUT') { return }
     if (propertiesDiv.style.display === 'none') {
       propertiesDiv.style.display = 'block'
     } else { propertiesDiv.style.display = 'none' }
@@ -115,7 +114,6 @@ function addNotes (todo) {
   const notes = document.createElement('textarea')
   notes.placeholder = 'Notes'
   notes.className = 'notes'
-  // notes.style.display = 'inline-block'
 
   if (todo.notes !== undefined) { notes.value = todo.notes }
 
@@ -168,6 +166,7 @@ function addPriorityLabel (todo) {
 function addPriority (todo) {
   const priority = document.createElement('select') // priority.class = 'priority'
   priority.id = 'priority' + String(todo.id)
+  priority.className = 'classPriority'
 
   const priorityOptions = ['None', 'Low', 'Medium', 'High']
   priorityOptions.forEach(p => {
