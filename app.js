@@ -24,9 +24,7 @@ button.addEventListener('click', (event) => {
   }
 })
 
-function updateLocalStorage () {
-  window.localStorage.setItem('todosArr', JSON.stringify(todosArr))
-}
+const updateLocalStorage = () => window.localStorage.setItem('todosArr', JSON.stringify(todosArr))
 
 function displayTodos () {
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
@@ -45,11 +43,11 @@ function makeItemDiv (todo) {
   const textInput = addTextInput(todo)
   const checkBox = addCheckBox(todo)
   const propertiesDiv = makePropertiesDiv(todo)
-  const delButton = addDelButton(todo)
+  // const delButton = addDelButton(todo)
 
   itemDiv.appendChild(checkBox)
   itemDiv.appendChild(textInput)
-  itemDiv.appendChild(delButton)
+  // itemDiv.appendChild(delButton)
   itemDiv.appendChild(propertiesDiv)
   itemDiv.appendChild(document.createElement('br'))
 
@@ -69,7 +67,7 @@ function makePropertiesDiv (todo) {
   const dateLabel = addDateLabel(todo)
   const priority = addPriority(todo)
   const priorityLabel = addPriorityLabel(todo)
-  // const delButton = addDelButton(todo)
+  const delButton = addDelButton(todo)
 
   const propertiesDiv = document.createElement('div')
   propertiesDiv.className = 'classPropertyDiv'
@@ -80,7 +78,7 @@ function makePropertiesDiv (todo) {
   propertiesDiv.appendChild(document.createElement('br'))
   propertiesDiv.appendChild(priorityLabel)
   propertiesDiv.appendChild(priority)
-  // propertiesDiv.appendChild(delButton)
+  propertiesDiv.appendChild(delButton)
 
   return propertiesDiv
 }
@@ -122,6 +120,7 @@ function addNotes (todo) {
   // const notes = document.createElement('textarea')
   notes.placeholder = 'Notes'
   notes.style = 'margin-left: 20px; height: 150px;'
+  // notes.style.display = 'inline-block'
 
   if (todo.notes !== undefined) { notes.value = todo.notes }
 
