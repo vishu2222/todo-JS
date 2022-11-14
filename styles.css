@@ -25,6 +25,10 @@ body {
     margin-bottom: 2px;
 }
 
+/* .delTodo {
+    margin-left: 230px;
+} */
+
 .delTodo:hover { /* psuedo class hover  */
     background-color: #F7A4A4;
 }

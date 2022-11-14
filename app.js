@@ -190,7 +190,6 @@ function addDelButton (todo) {
   const delButton = document.createElement('button')
   delButton.className = 'delTodo' // delButton.id = 'delTodo' + String(todo.id)
   delButton.textContent = 'Delete' // delButton.setAttribute('textContent', 'Delete') didnt work?
-  delButton.style = 'margin-left: 230px;'
   const id = todo.id
 
   delButton.addEventListener('click', () => {
