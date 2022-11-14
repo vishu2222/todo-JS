@@ -63,13 +63,6 @@ function makeItemDiv (todo) {
   return itemDiv
 }
 
-function addPriorityLabel (todo) {
-  const priorityLabel = document.createElement('Label')
-  priorityLabel.setAttribute('for', todo.priority.id)
-  priorityLabel.innerHTML = ' Priority: '
-  return priorityLabel
-}
-
 function makePropertiesDiv (todo) {
   const notes = addNotes(todo)
   const date = addDate(todo)
@@ -126,6 +119,7 @@ function addTextInput (todo) {
 function addNotes (todo) {
   const notes = document.createElement('input')
   notes.type = 'textarea'
+  // const notes = document.createElement('textarea')
   notes.placeholder = 'Notes'
   notes.style = 'margin-left: 20px; height: 150px;'
 
@@ -141,8 +135,9 @@ function addNotes (todo) {
 
 function addDateLabel (todo) {
   const dateLabel = document.createElement('Label')
-  dateLabel.setAttribute('for', todo.date.id)
+  dateLabel.setAttribute('for', 'date' + String(todo.id))
   dateLabel.textContent = ' Due Date: '
+  dateLabel.style = 'margin-left: 45px;'
   return dateLabel
 }
 
@@ -165,6 +160,14 @@ function addDate (todo) {
   })
 
   return date
+}
+
+function addPriorityLabel (todo) {
+  const priorityLabel = document.createElement('Label')
+  priorityLabel.setAttribute('for', 'priority' + String(todo.id))
+  priorityLabel.innerHTML = ' Priority: '
+  priorityLabel.style = 'margin-left: 230px;'
+  return priorityLabel
 }
 
 function addPriority (todo) {
