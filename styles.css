@@ -27,8 +27,10 @@ body {
 
 .delTodo {
     position: relative;
-    left: 250px;
-    bottom: 80px;
+    left: 300px;
+    bottom: 60px;
+    width: 70px;
+
 }
 
 .delTodo:hover { /* psuedo class hover  */
@@ -40,6 +42,8 @@ body {
     border: 1px;
     margin-bottom: 3px;
     margin-top: 3px;
+    margin-right: 280px;
+
 }
 
 .ClassItemInput:hover {
@@ -77,6 +81,9 @@ body {
     left: 310px;
 }
 
+/* .dropDown {
+   margin-top: 5px;
+} */
 
 
 
