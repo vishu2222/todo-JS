@@ -1,0 +1,55 @@
+Html Tags:
+
+<!DOCTYPE html>  // html 5
+<html> // root element of the html page
+<head> // head element contains meta information about html page
+<title>
+<body>
+<h1>
+<h2>
+<h3>
+<h4>
+<h5>
+<h6>
+<p>
+<pre> </pre>     // preserves the spaces and lines
+<hr>             // horizontal line
+<br>             // line breaks
+
+
+Anchor Tag: <a></a>
+<a href="https://www.w3schools.com">This is a link</a>
+
+Image tag: <img>
+<img src="img.jpg" alt="img.com" width="104" height="142">
+
+Attributes:
+
+src      // source ref to a file <img src="img_girl.jpg">
+width    // <img src="img_girl.jpg" width="500" height="600">
+height
+alt      // provides an alternate text to an image in case it fails loading
+style    // add styles to an element like font, colur etc
+eg: <p style = "color: red">    </p>
+title
+
+style   // 
+<tagname style="property:value;">
+
+background-color  // <body style="background-color:powderblue;">
+color             // <h1 style="color:blue;">This is a heading</h1>
+font-family       // <h1 style="font-family:verdana;">This is a heading</h1> // text font
+font-size         // <h1 style="font-size:300%;">This is a heading</h1> // text size
+text-align        // <h1 style="text-align:center;">Centered Heading</h1> // alignment of text
+border color      // <h1 style="border:2px solid Tomato;">Hello World</h1>
+<b> - Bold text
+<strong> - Important text
+<i> - Italic text
+<em> - Emphasized text
+<mark> - Marked text
+<small> - Smaller text
+<del> - Deleted text
+<ins> - Inserted text
+<sub> - Subscript text
+<sup> - Superscript text
+

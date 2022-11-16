@@ -1,0 +1,9 @@
+sudo su postgres		//
+psql 					//enter
+\l 						// shows the default databases
+\du 					// list users users
+ALTER USER postgress WITH PASSWORD 'yourPassword'; // change the password of the default user postgress
+CREATE USER userName WITH PASSWORD 'userPassword'; // creates a user with a password
+ALTER USER userName WITH SUPERUSER; // adds superusers privilages like createDB, createrole etc.
+drop user user2;           // to remove a user
+man psql 				   // manual

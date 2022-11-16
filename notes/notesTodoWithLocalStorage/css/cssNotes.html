@@ -1,0 +1,138 @@
+<head>
+<title>css Notes</title>
+<link rel="stylesheet" href="css/styles.css"> <!-- css dir is on same level as externalCss.html -->
+<link rel="icon" href="https://avatars.githubusercontent.com/u/90732088?s=400&u=28b27d6a5f2ff62ed74c8e18126493fed6647e81&v=4">
+</head>
+ 
+
+<body"> 
+  <div style="display: none;">
+    <input type="text">
+  </div>
+  
+  <div class="yellow">
+    <strong style="font-size: 25px;"> position fixed</strong>
+    <p style="position: fixed; top: 30px;">scroll</p>
+  </div>
+
+  <h3>text in h3</h3>
+  <hr>
+  <strong>TextDecoration</strong>
+  <strong> Css Display property</strong>
+  <p>paragraphs are bolock elements and take whole width</p>
+  <p>span, img, anchor tags are common inline elements and take only as much required.
+    we cannot change width of inline elements but we can change width of block elements.
+    By setting display style property to inline they let next elements to follow them on the 
+    same line. ('display': 'inline'). 
+    setting display: 'inline-block' makes element have both properties. i.e we can set their width
+    and also treat them as inline elements.
+  </p>
+
+  <p>using span: <span style="color: red;">spanned part</span> non spanned part</p>
+
+  <strong style="font-size: 25px; color: brown;"> Hiding visibility</strong>
+  <p>This word is displayed</p>
+  <p>This <span style="display: none;">word</span> is not displayed. "display": "none"</p>
+  <p>This <span style="visibility: hidden;"> word</span> is not displayed "visibility":"hidden"</p>
+  <p>setting display to none removes the element from being displayed. while visibility set to 
+    hidden just hides with a visible empty space 
+  </p>
+
+  <strong>Css positioning </strong>
+  <p>1) order of elements come from the html code.</p>
+  <p>2) childern sit on parents</p>
+  <div style="background-color: yellow ;">
+    <p>this is a child para that sits on the top of a div parent element whose background
+      is yellow. while this <span style="color: red;">word</span> written in a span element sits on its parent
+      p element 
+    </p>
+  </div>
+  <p>3) positioning elements: elements are usually positioned by the default layout. 
+    These have position: static. By setting it to relative it can be moved relative to
+    itself. moving an element by relative positioning doesnt move or effect other elements. The element 
+    that is moved through relative positioning moves by leaving empty space at its original position. 
+    "top": 20px in relative positioning sets 20px top margin from the current position. 
+  </p>
+  <p>The below images position is set to relative and is positioned 30px from left</p>
+  <img style="position: relative; left: 30px" src="./images/boxModel.png" alt="">
+  <p> we can set properties like top, bottom, left, right when position: relative</p>
+  <strong style="font-size: 25px;">Absolute positioning</strong>
+  <p>4) Through absolute positioning we can change the coordinates(top, left, botom, right)
+    relative to its parent element. Unlike relative positioning the original gost position is deleted.
+    This can affect the layout of other elements. Like the deleted space in the layout can be taken by
+    other surrounding elements
+
+
+    
+  </p>
+  <div class="AbsolutePositioning" style="background-color: yellow;">
+    <p>this is a parent div and the below image is positioned with "absolute" and 
+      is moved relative to its div parent 300px with left = 300px
+    </p>
+    <img id = 'img4' src="./images/boxModel.png" alt="">
+    <br>
+    <br>
+    <p>........</p>
+  </div>
+  <p>In <strong>Relative positioning</strong> the element is moved wrt where it should have been.
+  In <strong>Absolute positioning</strong> the element is moved wrt its parent</p>
+<br>
+<hr>
+ 
+
+  <p class="paraClassGreen">sample paragraph</p>
+  <p class="paraClassGreen demo">we can have only 1 id as a selector
+     but we can have multiple classes to one selector as this one. This paragraph
+     has two classes 'paraClassGreen' and 'demo'. The above pragraph has only one 
+     cass paraClassGreen while this paragraph has both paraClassGreen and demo.
+
+     Classes and id's are more specific selectors than tag selectors. 
+     Tag selectors properties can be over ridden by class or id 
+     selectors. Id's are unique throughout the html</p>
+<strong>psuedoClass</strong><br>
+<h2>Hover over me</h2> 
+<p> using :hover in styles.css for h2 element</p>
+<hr>
+<img src="https://avatars.githubusercontent.com/u/90732088?s=400&u=28b27d6a5f2ff62ed74c8e18126493fed6647e81&v=4" alt="vishu profile">
+<p>this image is also the favicon. Compare it with the below image. in the below
+  image border width is set as border-width: 0px 10px 20px 30px
+</p>
+
+<img id="img2" src="https://avatars.githubusercontent.com/u/90732088?s=400&u=28b27d6a5f2ff62ed74c8e18126493fed6647e81&v=4" alt="vishu profile">
+<br>
+<p>The below image is loaded from ./css/images directory using relative path.
+  its size is increased by setting width to 30%</p>
+<img id="img3" src="./images/boxModel.png" alt="">
+
+<p class="para-colorBg"> This is an example para with changed background background-color: #e5fbb8</p>
+
+<div id="paras">
+  <p><strong>Alligning text to center</strong> To align text to center set text-align: center</p>
+  <p>Also centering element can also be done by setting margin: "auto"</p>
+  <p>para1</p>
+  <p>para2</p>
+  <p>para3</p>
+</div>
+
+<p style="text-decoration: underline;"> Decorated text with underline</p>
+<div>
+  <strong style="font-size: 50px;">Box Model</strong>
+  
+  <p>setting width to 100% makes an element to occupy the whole width in the layout</p>
+  <p>border: solid shows a 3px border around the element</p>
+  <p>change the border width with border-width: 10px</p>
+  
+  <div id="top-container">
+    <p> This is the content inside the 10px solid boder colured green and 20px 
+      padded wrt to border. The bg-colour of the  div is light green. The margin is 
+      50px
+    </p>
+
+  </div>
+
+  <!-- <div id="bottom-container"> -->
+
+  </div>
+</div>
+</body>
+<!--  -->

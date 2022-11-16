@@ -1,0 +1,12 @@
+innerText:
+. The innerText property returns: Just the text content of the element and all its 
+children, without CSS hidden text spacing and tags, except <script> and <style> elements. (w3)
+
+textContent:
+. The textContent property returns: The text content of the element and all descendaces, with 
+spacing and CSS hidden text, but without tags. (w3)
+. The textContent provides access to the text inside the element: only text, minus all <tags> (jsInfo)
+
+innerHTML:
+. The innerHTML property allows to get the HTML inside the element as a string. (js info)
+
