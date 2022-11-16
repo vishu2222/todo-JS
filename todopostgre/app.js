@@ -2,7 +2,7 @@ const express = require('express')
 const { Client } = require('pg')
 // const path = require('path')
 
-const clientDb = new Client({
+const pgClient = new Client({
   user: 'todouser',
   host: 'localhost',
   database: 'postgres',
@@ -10,11 +10,11 @@ const clientDb = new Client({
   port: 5432
 })
 
-clientDb.connect((err) => {
+pgClient.connect((err) => {
   if (err) { throw err }
   console.log('connected')
 })
-console.log(clientDb)
+console.log(pgClient)
 const app = express()
 app.use(express.static('public'))
 
