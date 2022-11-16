@@ -7,3 +7,9 @@ CREATE USER userName WITH PASSWORD 'userPassword'; // creates a user with a pass
 ALTER USER userName WITH SUPERUSER; // adds superusers privilages like createDB, createrole etc.
 drop user user2;           // to remove a user
 man psql 				   // manual
+
+//sudo system ctlservice enable postgres
+
+
+// https://www.postgresql.org/docs/9.1/runtime-config.html
+// https://node-postgres.com/ 
