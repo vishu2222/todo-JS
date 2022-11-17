@@ -1,0 +1,90 @@
+body {
+  background-color: #68A7AD;
+}
+
+.form {
+    margin-left: 300px;
+    margin-bottom: 20px;
+    /* background-color: aqua; */
+}
+
+#todo {
+    padding-left: 140px;
+    font-size: large;
+}
+
+#inputTxt {
+    width: 300px;
+}
+
+.todoItem {
+    margin-left: 250px;
+    border-radius: 8px;
+    background-color: #C4D7E0;
+    margin-right: 350px;
+    margin-bottom: 2px;
+}
+
+.delTodo {
+    position: relative;
+    left: 300px;
+    bottom: 60px;
+    width: 70px;
+
+}
+
+.delTodo:hover { /* psuedo class hover  */
+    background-color: #F7A4A4;
+}
+
+.ClassItemInput {
+    background-color: #C4D7E0; 
+    border: 1px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    margin-right: 280px;
+
+}
+
+.ClassItemInput:hover {
+    border:groove; /* ridge */
+    border-radius: 8px;
+}
+
+.notes {
+    margin-left: 20px;
+    height: 150px;
+    display: inline-block;
+}
+
+.ClassDateLabel {
+    position: relative;
+    bottom: 130px;
+    left: 50px;
+}
+
+.dateClass {
+    position: relative;
+    bottom: 130px;
+    left: 50px;
+}
+
+.classPriorityLabel {
+    position: relative;
+    bottom: 100px;
+    right: 145px;
+}
+
+.classPriority {
+    position: relative;
+    bottom: 120px;
+    left: 310px;
+}
+
+/* .dropDown {
+   margin-top: 5px;
+} */
+
+
+
+/*  */
