@@ -1,12 +1,26 @@
 sudo su postgres		//
 psql 					//enter
-\l 						// shows the default databases
+\l 						// shows the default databases // lists the db's
 \du 					// list users users
+\d                      // list tables
+\d person               // table person
+\q                      // quit psql mode
+DROP TABLE person       // 
+\c test                 // to connect to test database
+CTRL+l                  // clear screen
+psql -h localhost -p 5432 -U userName dbname // connect to a db 
+
+sudo service postgresql restart  // 
+
 ALTER USER postgress WITH PASSWORD 'yourPassword'; // change the password of the default user postgress
 CREATE USER userName WITH PASSWORD 'userPassword'; // creates a user with a password
 ALTER USER userName WITH SUPERUSER; // adds superusers privilages like createDB, createrole etc.
 drop user user2;           // to remove a user
 man psql 				   // manual
+
+
+create database test;      // create database
+
 
 //sudo system ctlservice enable postgres
 
