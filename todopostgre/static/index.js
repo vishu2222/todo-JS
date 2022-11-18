@@ -4,7 +4,6 @@ const todosArr = await fetchTodos()
 displayTodos(todosArr)
 
 function displayTodos (todos) {
-  console.log(todos)
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
   todoContainer.textContent = '' // replace all existing childern in todoContainer div with single textnode
   todosArr.forEach(todo => {
@@ -59,12 +58,12 @@ function makePropertiesDiv (todo) {
 function addCheckBox (todo) {
   const checkBox = document.createElement('input')
   checkBox.type = 'checkbox'
-  if (todo.checkBox) { checkBox.checked = todo.checkBox } // else { todo.checkBox = checkBox.checked }
+  if (todo.checkbox) { checkBox.checked = todo.checkbox } // else { todo.checkBox = checkBox.checked }
 
   checkBox.addEventListener('change', () => {
-    todo.checkBox = checkBox.checked
+    todo.checkbox = checkBox.checked
     const txtElement = document.getElementById('itemInput' + String(todo.id))
-    if (todo.checkBox === true) {
+    if (todo.checkbox === true) {
       txtElement.style.textDecoration = 'line-through'
     } else { txtElement.style.textDecoration = 'none' }
     // updateLocalStorage()
