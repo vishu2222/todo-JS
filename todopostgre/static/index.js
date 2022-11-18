@@ -1,6 +1,6 @@
 import { fetchTodos } from './fetch.js'
 
-const todosArr = await fetchTodos()
+let todosArr = await fetchTodos()
 displayTodos(todosArr)
 
 function displayTodos (todos) {
