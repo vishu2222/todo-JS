@@ -1,6 +1,6 @@
 npm init // Set up a new NPM package
 npm install express
-
+npm install pg
 
 
 nodemon server.js  // to run
