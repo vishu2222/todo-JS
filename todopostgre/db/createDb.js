@@ -1,6 +1,7 @@
-const { Client } = require('pg')
+import pg from 'pg'
+const Client = pg.Client
 
-const pgClient = new Client({
+const client = new Client({
   user: 'todouser',
   host: 'localhost',
   database: 'tododb',
@@ -9,36 +10,42 @@ const pgClient = new Client({
 })
 
 // connect to db
-pgClient.connect((err) => { if (err) { throw err } console.log('connected') })
+client.connect((err) => { if (err) { throw err } console.log('connected') })
 
-const createDbQuery = 'CREATE DATABASE tododb;'
-const createSchema = 'CREATE SCHEMA IF NOT EXISTS todoSchema;'
+const removeSeq = 'DROP SEQUENCE todoSchema.seq_id;'
+const createSeq = 'CREATE SEQUENCE todoSchema.seq_id INCREMENT 1 START 1;'
+const dropTable = 'DROP TABLE todoSchema.todotable;'
 const createTableQuery = `CREATE TABLE IF NOT EXISTS todoSchema.todotable (
-    id INT PRIMARY KEY,
-    txt varchar(50),
-    date TIMESTAMP,
-    priority varchar(10),
-    notes varchar(200),
+    id SERIAL PRIMARY KEY,
+    txt VARCHAR(80),
+    date VARCHAR(10) , -- CHECK (date >= CURRENT_DATE)
+    priority VARCHAR(10) CHECK (priority in ('None','Low', 'Medium', 'High')), 
+    notes VARCHAR(500),
     checkbox BOOLEAN
 );`
 
-pgClient.query(createDbQuery, (req, res) => console.log(req, res))
-pgClient.query(createSchema, (req, res) => console.log(req, res))
-pgClient.query(createTableQuery, (req, res) => console.log(req, res.rows))
+client.query(removeSeq, (err, res) => console.log(err))
+client.query(dropTable, (err, res) => console.log(err))
+client.query(createSeq, (err, res) => console.log(err))
+client.query(createTableQuery, (err, res) => console.log(err))
 
-// remove db
-// const removeDbQuery = 'DROP DATABASE IF EXISTS tododb;'
-// pgClient.query(removeDbQuery)
-//   .then(res => console.log(res.rows[0]))
-//   .catch(e => console.error(e.stack))
+// sample inserts
+const insertQuery1 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
+VALUES (nextval('todoSchema.seq_id'), 'todo1', CURRENT_DATE, 'Low', 'todo1_txt', true);`
+const insertQuery2 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
+VALUES (nextval('todoSchema.seq_id'), 'todo2', CURRENT_DATE, 'Low', 'todo2_txt', false);`
+
+client.query(insertQuery1, (err, res) => console.log(err))
+client.query(insertQuery2, (err, res) => console.log(err))
+// client.end()
 
 // const checkdbExistsQuery = 'SELECT datname FROM pg_database WHERE datname = \'tododb\';'
 
-// pgClient.query(checkdbExistsQuery, (req, res) => {
+// client.query(checkdbExistsQuery, (req, res) => {
 //   if (res.rowCount === 0) {
-//     pgClient.query(createDbQuery).then(res => console.log(res)).catch(e => console.error(e.stack))
-//     pgClient.query(createSchema).then(res => console.log(res)).catch(e => console.error(e.stack))
-//     pgClient.query(createTableQuery).then(res => console.log(res)).catch(e => console.error(e.stack))
+//     client.query(createDbQuery).then(res => console.log(res)).catch(e => console.error(e.stack))
+//     client.query(createSchema).then(res => console.log(res)).catch(e => console.error(e.stack))
+//     client.query(createTableQuery).then(res => console.log(res)).catch(e => console.error(e.stack))
 //   }
 // })
 
