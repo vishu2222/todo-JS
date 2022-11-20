@@ -1,0 +1,53 @@
+Ref: https://eloquentjavascript.net/18_http.html
+
+Request:
+
+GET /18_http.html HTTP/1.1
+key1:value1
+key2:value2
+etc
+
+//
+
+Response:
+
+HTTP/1.1 200 OK
+key1:value1
+key2:value2
+etc
+
+<!doctype html>
+.....
+
+//
+
+submiting a form containting 2 input fields with name attribute set to name and message, with GET method
+
+GET /example/message.html?name=Jean&message=Yes%3F HTTP/1.1
+
+//
+
+fetch:
+
+fetch(url).then(res => {
+    .....
+})
+
+fetch("url",{method:"DELETE"}).then({
+
+})
+
+1) fetch returns a promise object that resolves to a Response object( say res).
+2) res contains info sent by the server.
+3) get info from res using methods like
+res.status
+res.headers.get("Content-Type")
+4) if the url doesnt start with http then it is treated as relative to the location of the current document
+5) the actual content of the response is in res.text() method
+6) res.json() returns body as JSON on resolution
+7) browsers add more headders like content length to inform server
+
+//
+set focus on an element
+document.querySelector("input").focus() 
+the document.activeElement.tagName contains the element which is currently on focus
