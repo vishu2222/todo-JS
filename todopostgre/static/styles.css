@@ -2,15 +2,16 @@ body {
   background-color: #68A7AD;
 }
 
-.form {
+#inputTxt {
     margin-left: 300px;
     margin-bottom: 20px;
-    /* background-color: aqua; */
 }
 
 #todo {
     padding-left: 140px;
     font-size: large;
+    margin-left: 300px;
+
 }
 
 #inputTxt {
