@@ -6,18 +6,15 @@
   <title>ToDo-App</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="icon" href="/images/fav.png">
-  <script defer src="./index.js" type="module"> </script>
+  <script defer src="./index.js" type="module"> </script> <!-- differ excecutes js after loading script https://stackoverflow.com/questions/10808109/script-tag-async-defer -->
 
 </head>
 
 <body>
-  <div class="form" >              <!-- style="padding-left: 400px;" -->
-    <form class="todoForm" >       <!-- enter works without clicking add button inside form  -->
-      <label id="todo" for="inputTxt"> <strong>To do</strong></label> <br>       <!--label for an element with id = "inputTxt" -->
-      <input type="text" id="inputTxt"  placeholder="what needs to be done?" width="30%" autofocus/>  <!-- name="todos" -->
-      <!-- <br> -->
+  <div>        
+      <label id="todo" for="inputTxt"> <strong>To do</strong></label> <br>
+      <input type="text" id="inputTxt" name="inputText" placeholder="what needs to be done?" width="30%" autofocus/>  <!-- name="todos" -->
       <button id="submitTodo">Add</button>
-    </form>
   </div>
 
   <div class="todoContainer"> </div>
