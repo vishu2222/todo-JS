@@ -1,9 +1,18 @@
+
 import { fetchTodos } from './fetch.js'
 
 let todosArr = await fetchTodos()
-displayTodos(todosArr)
+displayTodos()
 
-function displayTodos (todos) {
+const submitButton = document.getElementById('submitTodo')
+
+submitButton.addEventListener('click', async () =>{
+  const url = '/addTodo'
+  let postTodoResponse = await fetch(url, {method: 'POST' })
+  console.log(postTodoResponse)
+} )
+
+function displayTodos () {
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
   todoContainer.textContent = '' // replace all existing childern in todoContainer div with single textnode
   todosArr.forEach(todo => {
