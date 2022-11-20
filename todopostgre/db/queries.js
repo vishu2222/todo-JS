@@ -19,10 +19,11 @@ export function connectDb () {
 
 export async function getTodos () {
   const todos = await (client.query('select * from todoSchema.todotable'))
-  // console.log(todos)
-  return todos
+  return todos.rows
 }
 
-
-// client.query(`INSERT INTO todoschema.todotable (id) VALUES (1);`)
-//   .then(res => console.log(res.rows))
+export async function insertTodo (todo) {
+  const insertQuery = `INSERT INTO todoschema.todotable (id, txt) 
+  VALUES (nextval('todoSchema.seq_id'), '${todo.inputText}');`
+  return await client.query(insertQuery)
+}
