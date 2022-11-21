@@ -35,8 +35,8 @@ VALUES (nextval('todoSchema.seq_id'), 'todo1', CURRENT_DATE, 'Low', 'todo1_txt',
 const insertQuery2 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
 VALUES (nextval('todoSchema.seq_id'), 'todo2', CURRENT_DATE, 'Low', 'todo2_txt', false);`
 
-client.query(insertQuery1, (err, res) => console.log(err))
-client.query(insertQuery2, (err, res) => console.log(err))
+// client.query(insertQuery1, (err, res) => console.log(err))
+// client.query(insertQuery2, (err, res) => console.log(err))
 // client.end()
 
 // const checkdbExistsQuery = 'SELECT datname FROM pg_database WHERE datname = \'tododb\';'
