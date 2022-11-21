@@ -1,6 +1,6 @@
 // const path = require('path')
 import  express  from "express"
-import { connectDb, getTodos, insertTodo } from './db/queries.js'
+import { connectDb, getTodos, insertTodo, updateTodo, deleteTodo } from './db/queries.js'
 import bodyParser from "body-parser"
 
 const app = express()
@@ -8,6 +8,7 @@ app.use(bodyParser.json())
 app.use(express.static('static')) // middleware express function to serve static files in a directory
 
 connectDb()
+
 app.get('/todos', async (req, res) => {
   try {
     const todos = await getTodos()
@@ -22,8 +23,19 @@ app.post('/addTodo', async (req, res) => {
   res.json(200)
 })
 
-app.post('/update/:id/:property', (req, res) => {
+app.post('/update/:id/:property', async (req, res) => {
+  const id = req.params.id.slice(1)
+  const property = req.params.property.slice(1)
+  const updatedVal = req.body.updatedVal
+  const dbRes = await updateTodo(id, property, updatedVal)
+  if (dbRes.rowCount === 1 ) { res.json(200) }
+  else { res.json('Error') }
+})
 
+app.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id.slice(1)
+  const dbRes = deleteTodo(Number(id))
+  res.json(`Recieved delete request for id ${id}`)
 })
 
 app.listen(3000, () => {
