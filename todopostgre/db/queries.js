@@ -13,17 +13,21 @@ const client = new Client({
 export function connectDb () {  
   client.connect((err) => {
     if (err) console.log(err)
-    else console.log('connected')
+    else console.log('connected to dataBase')
   })
 }
 
 export async function getTodos () {
-  const todos = await (client.query('select * from todoSchema.todotable'))
-  return todos.rows
+  try {
+    const todos = await (client.query('select * from todoSchema.todotable'))
+    return todos.rows
+  } catch(err) {
+    console.log(err)
+  }
 }
 
 export async function insertTodo (todo) {
   const insertQuery = `INSERT INTO todoschema.todotable (id, txt) 
-  VALUES (nextval('todoSchema.seq_id'), '${todo.inputText}');`
+  VALUES (nextval('todoSchema.seq_id'), '${todo}');`
   return await client.query(insertQuery)
 }
