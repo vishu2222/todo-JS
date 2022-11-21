@@ -21,7 +21,7 @@ const createTableQuery = `CREATE TABLE IF NOT EXISTS todoSchema.todotable (
     date VARCHAR(10) , -- CHECK (date >= CURRENT_DATE)
     priority VARCHAR(10) CHECK (priority in ('None','Low', 'Medium', 'High')), 
     notes VARCHAR(500),
-    checkbox BOOLEAN
+    checkbox BOOLEAN DEFAULT 'false'
 );`
 
 client.query(removeSeq, (err, res) => console.log(err))
