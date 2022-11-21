@@ -1,5 +1,6 @@
 
-import { fetchTodos, postTodo } from './fetch.js'
+import { fetchTodos, postTodo, requestUpdate, requestDel } from './fetch.js'
+// import path from 'path'
 
 let todosArr = await fetchTodos()
 displayTodos()
@@ -15,7 +16,6 @@ submitButton.addEventListener('click', async () => {
 })
 
 function displayTodos () {
-  console.log(todosArr)
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
   todoContainer.textContent = '' // replace all existing childern in todoContainer div with single textnode
   todosArr.forEach(todo => {
@@ -28,8 +28,8 @@ function makeItemDiv (todo) {
   itemDiv.id = todo.id
   itemDiv.className = 'todoItem'
 
-  const textInput = addTextInput(todo)
   const checkBox = addCheckBox(todo)
+  const textInput = addTextInput(todo)
   const propertiesDiv = makePropertiesDiv(todo)
 
   itemDiv.appendChild(checkBox)
@@ -70,21 +70,21 @@ function makePropertiesDiv (todo) {
 function addCheckBox (todo) {
   const checkBox = document.createElement('input')
   checkBox.type = 'checkbox'
-  if (todo.checkbox !== undefined) { checkBox.checked = todo.checkbox } // else { todo.checkBox = checkBox.checked }
+  if (todo.checkbox === undefined) { todo.checkbox = false }
+  else { checkBox.checked = todo.checkbox  }
 
   checkBox.addEventListener('change', () => {
-    // updateDb()
-    const url = '/update/todo.id'
-    const res = fetch()
+    const property = 'checkbox'
+    const val = String(checkBox.checked)
+    const res = requestUpdate(property, val, todo)
+    // res.then((val) => val.json()).then(data => console.log(data))
 
     todo.checkbox = checkBox.checked
     const txtElement = document.getElementById('itemInput' + String(todo.id))
     if (todo.checkbox === true) {
       txtElement.style.textDecoration = 'line-through'
     } else { txtElement.style.textDecoration = 'none' }
-    
   })
-
   return checkBox
 }
 
@@ -94,10 +94,16 @@ function addTextInput (todo) {
   itemInput.className = 'ClassItemInput'
   itemInput.type = 'text'
   itemInput.value = todo.txt
+  if (todo.checkbox === true) {
+    itemInput.style.textDecoration = 'line-through'
+  } else { itemInput.style.textDecoration = 'none' }
 
   itemInput.addEventListener('change', () => {
+    const property = 'txt'
+    const val = itemInput.value
+    const res = requestUpdate(property, val, todo)
+    // res.then((val) => val.json()).then(data => console.log(data))
     todo.txt = itemInput.value
-    // updateLocalStorage()
   })
   return itemInput
 }
@@ -110,10 +116,12 @@ function addNotes (todo) {
   if (todo.notes !== undefined) { notes.value = todo.notes }
 
   notes.addEventListener('change', () => {
+    const property = 'notes'
+    const val = notes.value
+    const res = requestUpdate(property, val, todo)
+    // res.then((val) => val.json()).then(data => console.log(data))
     todo.notes = notes.value
-    // updateLocalStorage()
   })
-
   return notes
 }
 
@@ -139,8 +147,10 @@ function addDate (todo) {
   }
 
   date.addEventListener('change', () => {
+    const property = 'date'
+    const val = date.value
+    const res = requestUpdate(property, val, todo)
     todo.date = date.value
-    // updateLocalStorage()
   })
 
   return date
@@ -171,8 +181,10 @@ function addPriority (todo) {
   }
 
   priority.addEventListener('change', () => {
+    const property = 'priority'
+    const val = priority.value
+    const res = requestUpdate(property, val, todo)
     todo.priority = priority.value
-    // updateLocalStorage()
   })
   return priority
 }
@@ -184,10 +196,10 @@ function addDelButton (todo) {
   const id = todo.id
 
   delButton.addEventListener('click', () => {
+    const res = requestDel(id)
+    // const url = `/delete/:${String(id)}`
+    // const res = fetch(url, { method: 'DELETE' } )
     document.getElementById(id).remove()
-    todosArr = todosArr.filter(item => item.id !== id)
-    // updateLocalStorage()
   })
-
   return delButton
 }
