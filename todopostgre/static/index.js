@@ -1,18 +1,21 @@
 
-import { fetchTodos } from './fetch.js'
+import { fetchTodos, postTodo } from './fetch.js'
 
 let todosArr = await fetchTodos()
 displayTodos()
 
 const submitButton = document.getElementById('submitTodo')
-
-submitButton.addEventListener('click', async () =>{
-  const url = '/addTodo'
-  let postTodoResponse = await fetch(url, {method: 'POST' })
-  console.log(postTodoResponse)
-} )
+submitButton.addEventListener('click', async () => {
+  const inputTxt = document.getElementById('inputTxt')
+  const res = await postTodo(inputTxt)
+  if (res.status === 200) {
+    todosArr = await fetchTodos()
+    displayTodos()
+  } else { console.log('unable to post')}
+})
 
 function displayTodos () {
+  console.log(todosArr)
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
   todoContainer.textContent = '' // replace all existing childern in todoContainer div with single textnode
   todosArr.forEach(todo => {
@@ -67,15 +70,19 @@ function makePropertiesDiv (todo) {
 function addCheckBox (todo) {
   const checkBox = document.createElement('input')
   checkBox.type = 'checkbox'
-  if (todo.checkbox) { checkBox.checked = todo.checkbox } // else { todo.checkBox = checkBox.checked }
+  if (todo.checkbox !== undefined) { checkBox.checked = todo.checkbox } // else { todo.checkBox = checkBox.checked }
 
   checkBox.addEventListener('change', () => {
+    // updateDb()
+    const url = '/update/todo.id'
+    const res = fetch()
+
     todo.checkbox = checkBox.checked
     const txtElement = document.getElementById('itemInput' + String(todo.id))
     if (todo.checkbox === true) {
       txtElement.style.textDecoration = 'line-through'
     } else { txtElement.style.textDecoration = 'none' }
-    // updateLocalStorage()
+    
   })
 
   return checkBox
