@@ -1,6 +1,5 @@
-// const path = require('path')
 import  express  from "express"
-import { connectDb, getTodos, insertTodo, updateTodo, deleteTodo } from './db/queries.js'
+import { connectDb, getTodos, insertTodo, updateTodo, deleteTodo, deleteDone, getCompleted, getPending } from './db/queries.js'
 import bodyParser from "body-parser"
 
 const app = express()
@@ -34,8 +33,33 @@ app.post('/update/:id/:property', async (req, res) => {
 
 app.delete('/delete/:id', async (req, res) => {
   const id = req.params.id.slice(1)
-  const dbRes = deleteTodo(Number(id))
+  const dbRes = await deleteTodo(Number(id))
   res.json(`Recieved delete request for id ${id}`)
+})
+
+app.delete('/deleteDone', async (req, res) => {
+  try {
+    const dbRes = await deleteDone()
+    if ( dbRes.rowCount >= 0 ) {
+      res.json(200)
+    }
+  } catch(e) {
+    console.log(e)
+  }
+})
+
+app.get('/getCompleted', async (req, res) => {
+  try {
+    const dbRes = await getCompleted()
+    res.json(dbRes.rows)
+  } catch(e) { console.log(e) }
+})
+
+app.get('/getPending', async (req, res) => {
+  try {
+    const dbRes = await getPending()
+    res.json(dbRes.rows)
+  } catch(e) { console.log(e) }
 })
 
 app.listen(3000, () => {
