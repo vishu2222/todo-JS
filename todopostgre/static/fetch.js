@@ -33,6 +33,24 @@ export async function requestUpdate (property, val, todo) {
 
 export async function requestDel (id) {
   const url = `/delete/:${String(id)}`
-  const res = fetch(url, { method: 'DELETE' } )
+  const res = await fetch(url, { method: 'DELETE' } )
   return res
+}
+
+export async function requestDelDone () {
+  const res = await fetch('/deleteDone', {method: 'DELETE'})
+  if (res.status === 200) { return 'done' }
+  throw new Error('invalid response')
+}
+
+export async function requestCompleted () {
+  const res = await fetch('/getCompleted')
+  const data = await res.json()
+  return data
+}
+
+export async function requestPending () {
+  const res = await fetch('/getPending')
+  const data = await res.json()
+  return data
 }

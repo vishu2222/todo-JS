@@ -1,18 +1,20 @@
 
-import { fetchTodos, postTodo, requestUpdate, requestDel } from './fetch.js'
-// import path from 'path'
+import { fetchTodos, postTodo, requestUpdate, requestDel, requestDelDone, requestCompleted, requestPending } from './fetch.js'
 
-let todosArr = await fetchTodos()
+let todosArr = await fetchTodos() // need to move todosAtt into displaytodos function
 displayTodos()
 
 const submitButton = document.getElementById('submitTodo')
 submitButton.addEventListener('click', async () => {
   const inputTxt = document.getElementById('inputTxt')
-  const res = await postTodo(inputTxt)
-  if (res.status === 200) {
+  if (inputTxt.value.length !== 0) {
+    const res = await postTodo(inputTxt)
+    if (res.status === 200) {
     todosArr = await fetchTodos()
     displayTodos()
-  } else { console.log('unable to post')}
+    } else { console.log('unable to post')}
+    inputTxt.value = ''
+  }
 })
 
 function displayTodos () {
@@ -105,6 +107,7 @@ function addTextInput (todo) {
     // res.then((val) => val.json()).then(data => console.log(data))
     todo.txt = itemInput.value
   })
+
   return itemInput
 }
 
@@ -195,11 +198,40 @@ function addDelButton (todo) {
   delButton.textContent = 'Delete' // delButton.setAttribute('textContent', 'Delete') didnt work?
   const id = todo.id
 
-  delButton.addEventListener('click', () => {
-    const res = requestDel(id)
-    // const url = `/delete/:${String(id)}`
-    // const res = fetch(url, { method: 'DELETE' } )
+  delButton.addEventListener('click', async () => {
+    const res = await requestDel(id)
     document.getElementById(id).remove()
   })
   return delButton
 }
+
+const deleteDone = document.getElementById('DeleteDone')
+deleteDone.addEventListener('click', async () => {
+  const res = await requestDelDone()
+  if (res === 'done') {
+    todosArr = await fetchTodos()
+    displayTodos()
+  }
+})
+
+const statusButton = document.getElementById('showCompleted')
+statusButton.addEventListener('click', async () => {
+  if (statusButton.textContent === 'Show Completed') {
+    todosArr = await requestCompleted()
+    displayTodos()
+    statusButton.textContent = 'Show Pending'
+  } else if (statusButton.textContent === 'Show Pending') {
+    todosArr = await requestPending()
+    displayTodos()
+    statusButton.textContent = 'Show All'
+  } else if (statusButton.textContent === 'Show All'){
+    todosArr = await fetchTodos()
+    displayTodos()
+    statusButton.textContent = 'Show Completed'
+  }
+})
+
+const DeleteAll = document.getElementById('DeleteAll')
+DeleteAll.addEventListener('click', async () => {
+  
+})
