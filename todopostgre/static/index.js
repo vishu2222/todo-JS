@@ -1,5 +1,5 @@
 
-import { fetchTodos, postTodo, requestUpdate, requestDel, requestDelDone, requestCompleted, requestPending } from './fetch.js'
+import { fetchTodos, postTodo, requestUpdate, requestDel, requestDelDone, requestCompleted, requestPending, deleteAllTodos } from './fetch.js'
 
 let todosArr = await fetchTodos() // need to move todosAtt into displaytodos function
 displayTodos()
@@ -233,5 +233,9 @@ statusButton.addEventListener('click', async () => {
 
 const DeleteAll = document.getElementById('DeleteAll')
 DeleteAll.addEventListener('click', async () => {
-  
+  const status = await deleteAllTodos()
+  if (status === 200 ) {
+    todosArr = await fetchTodos()
+    displayTodos()
+  }
 })

@@ -61,3 +61,8 @@ export async function getPending () {
   WHERE checkbox = 'false' ORDER BY id;`
   return await client.query(query)
 }
+
+export async function deleteAll() {
+  const query = `TRUNCATE todoschema.todotable;`
+  return await client.query(query)
+}

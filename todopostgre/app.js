@@ -1,5 +1,5 @@
 import  express  from "express"
-import { connectDb, getTodos, insertTodo, updateTodo, deleteTodo, deleteDone, getCompleted, getPending } from './db/queries.js'
+import { connectDb, getTodos, insertTodo, updateTodo, deleteTodo, deleteDone, getCompleted, getPending, deleteAll } from './db/queries.js'
 import bodyParser from "body-parser"
 
 const app = express()
@@ -59,6 +59,14 @@ app.get('/getPending', async (req, res) => {
   try {
     const dbRes = await getPending()
     res.json(dbRes.rows)
+  } catch(e) { console.log(e) }
+})
+
+app.delete('/deleteAll', async (req, res) => {
+  try {
+    const dbRes = await deleteAll()
+    // console.log(dbRes)
+    res.json(200)
   } catch(e) { console.log(e) }
 })
 

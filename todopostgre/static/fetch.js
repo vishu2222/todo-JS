@@ -54,3 +54,8 @@ export async function requestPending () {
   const data = await res.json()
   return data
 }
+
+export async function deleteAllTodos () {
+  const res = await fetch('/deleteAll', { method: 'DELETE'})
+  return res.status
+}
