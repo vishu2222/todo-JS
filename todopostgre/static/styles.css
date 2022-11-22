@@ -7,6 +7,11 @@ body {
     margin-bottom: 20px;
 }
 
+.todoContainer {
+  height: 350px;
+  overflow: auto;
+}
+
 #todo {
     padding-left: 140px;
     font-size: large;
@@ -80,6 +85,19 @@ body {
     position: relative;
     bottom: 120px;
     left: 310px;
+}
+
+#DeleteDone {
+    margin-left: 270px;
+    margin-top: 15px;
+}
+
+#showCompleted {
+    margin-left: 50px;
+}
+
+#DeleteAll {
+    margin-left: 60px;
 }
 
 /* .dropDown {
