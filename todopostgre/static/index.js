@@ -5,21 +5,22 @@ let todosArr = await fetchTodos() // need to move todosAtt into displaytodos fun
 displayTodos()
 
 const submitButton = document.getElementById('submitTodo')
-submitButton.addEventListener('click', async () => {
-  const inputTxt = document.getElementById('inputTxt')
-  if (inputTxt.value.length !== 0) {
-    const res = await postTodo(inputTxt)
+submitButton.addEventListener('click', async (event) => {
+  event.preventDefault()
+  const todoInput = document.getElementById('inputTxt')
+  if (todoInput.value.length !== 0) {
+    const res = await postTodo(todoInput)
     if (res.status === 200) {
     todosArr = await fetchTodos()
     displayTodos()
     } else { console.log('unable to post')}
-    inputTxt.value = ''
+    todoInput.value = ''
   }
 })
 
 function displayTodos () {
   const todoContainer = document.querySelector('.todoContainer') // todoContainer div in body
-  todoContainer.textContent = '' // replace all existing childern in todoContainer div with single textnode
+  todoContainer.textContent = ''
   todosArr.forEach(todo => {
     todoContainer.appendChild(makeItemDiv(todo))
   })
@@ -233,6 +234,7 @@ statusButton.addEventListener('click', async () => {
 
 const DeleteAll = document.getElementById('DeleteAll')
 DeleteAll.addEventListener('click', async () => {
+  // alert('delete all?')
   const status = await deleteAllTodos()
   if (status === 200 ) {
     todosArr = await fetchTodos()
