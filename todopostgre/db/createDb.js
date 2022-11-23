@@ -30,10 +30,10 @@ client.query(createSeq, (err, res) => console.log(err))
 client.query(createTableQuery, (err, res) => console.log(err))
 
 // sample inserts
-const insertQuery1 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
-VALUES (nextval('todoSchema.seq_id'), 'todo1', CURRENT_DATE, 'Low', 'todo1_txt', true);`
-const insertQuery2 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
-VALUES (nextval('todoSchema.seq_id'), 'todo2', CURRENT_DATE, 'Low', 'todo2_txt', false);`
+// const insertQuery1 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
+// VALUES (nextval('todoSchema.seq_id'), 'todo1', CURRENT_DATE, 'Low', 'todo1_txt', true);`
+// const insertQuery2 = `INSERT INTO todoSchema.todotable(id, txt, date, priority, notes, checkbox)
+// VALUES (nextval('todoSchema.seq_id'), 'todo2', CURRENT_DATE, 'Low', 'todo2_txt', false);`
 
 // client.query(insertQuery1, (err, res) => console.log(err))
 // client.query(insertQuery2, (err, res) => console.log(err))
