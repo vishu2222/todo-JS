@@ -17,12 +17,8 @@ export function connectDb () {
 }
 
 export async function getTodos () {
-  try {
-    const todos = await (client.query('SELECT * FROM todoSchema.todotable ORDER BY id;'))
+    const todos = await client.query('SELECT * FROM todoSchema.todotable ORDER BY id;')
     return todos.rows
-  } catch(err) {
-    console.log(err)
-  }
 }
 
 export async function insertTodo (todo) {
