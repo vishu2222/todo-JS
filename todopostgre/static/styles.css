@@ -30,6 +30,9 @@ body {
     margin-right: 350px;
     margin-bottom: 2px;
 }
+/* .classPropertyDiv{
+    border-top: groove;
+} */
 
 .delTodo {
     position: relative;
@@ -90,20 +93,27 @@ body {
 #DeleteDone {
     margin-left: 270px;
     margin-top: 15px;
+    background-color: #C4D7E0;
 }
 
 #showCompleted {
     margin-left: 50px;
+    background-color: #C4D7E0;
 }
 
 #DeleteAll {
     margin-left: 60px;
+    background-color: #C4D7E0; 
 }
 
-/* .dropDown {
-   margin-top: 5px;
-} */
+#DeleteAll:hover {
+    background-color: #C84B31;
+}
 
+#showCompleted:hover {
+    background-color: #66c831;
+}
 
-
-/*  */
+#DeleteDone:hover {
+    background-color: #C84B31;
+}
