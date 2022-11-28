@@ -1,18 +1,38 @@
-<!-- template -->
+<!-- template start-->
 <template>
-<ToDoForm></ToDoForm>
+<ToDoForm @todoAdded="addTodo"></ToDoForm>
 </template>
 
-<!-- script -->
+<!-- script start-->
 <script>
 import ToDoForm from './components/ToDoForm.vue'
 
 export default {
-  components: { ToDoForm }
+  data () {
+    return {
+      id: 1,
+      todosArr: [{ "id": '1', "txt": "todo1", "date": null, "priority": null, "notes": null, "checkbox": false }]
+    }
+  },
+
+  components: { ToDoForm },
+
+  methods: {
+    addTodo (todoTxtInput) {
+      this.id += 1
+      this.todosArr.push({'id': this.id, 'txt': todoTxtInput})
+      console.log(this.todosArr)
+    }
+  },
+
+  mounted () {
+    
+  }
+  
 }
 </script>
 
-<!-- style -->
+<!-- style start-->
 <style>
 
 </style>
