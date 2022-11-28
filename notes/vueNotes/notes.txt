@@ -1,0 +1,120 @@
+<script src="https://unpkg.com/vue@next"> </script>
+
+npm install vue@next
+
+npm install -g @vue/cli
+
+npm init vite-app <project name>
+
+//.............vite.....................
+
+npm create vite@latest . -- --template vue // creates a scaffold
+npm install // install dependencies
+npm run dev // open the browser at http://localhost:5173/
+
+//..............vue cli................
+npm install -g @vue/cli
+vue create modal-project
+
+// ...................................... https://vuejs.org/tutorial/
+Declarative rendering:
+
+export default {
+    data() {
+        return {
+            message: 'Hello world'
+        }
+    }
+}
+
+<template>
+  <h1>{{ message }}</h1>
+</template>
+
+// ......................................
+Attribute Binding:
+
+<div v-bind:id="dynamicId"></div>
+<div :id="dynamicId"></div>
+
+// ......................................
+Event Listeners:
+
+<button v-on:click="increment">{{ count }}</button>
+<button @click="increment">{{ count }}</button>
+
+export default {
+  data() {
+    return { count: 0 }
+  },
+  methods: {
+    increment() { this.count++ }
+  }
+}
+
+// ......................................
+Form Bindings
+
+<input v-model="text">
+v-model automatically syncs the <input>'s value with the bound state, so we no longer need to use an event handler for that.
+
+
+// .......................................
+Conditional rendering:
+
+<template>
+  <button @click="toggle">toggle</button>
+  <h1 v-if="awesome">Vue is awesome!</h1>
+  <h1 v-else>Oh no 😢</h1>
+</template>
+
+
+// ........................................
+list rendering
+
+<ul>
+    <li v-for="todo in todos" :key="todo.id">
+      {{ todo.text }}
+      <button @click="removeTodo(todo)">X</button>
+    </li>
+  </ul>
+
+// ......................................
+computedProperty: (https://vuejs.org/tutorial/#step-8)
+
+A computed property tracks other reactive state used in its computation as dependencies. It caches the result and automatically updates it
+when its dependencies change.
+
+<script>
+export default {
+  data() { return {  } },
+  computed: { //...  },
+  methods: {  }
+}
+</script>
+<template>      </template>
+<style>         </style>
+
+// ..........................................
+Lifecycle and Template Refs
+
+<script>
+export default {
+  mounted() {
+    this.$refs.p.textContent = 'mounted!'
+  }
+}
+</script>
+
+<template>
+  <p ref="p">hello</p>
+</template>
+
+//...........................................
+Watchers
+
+watch: {
+    count(newCount) {
+      console.log(`new count is: ${newCount}`)
+    }
+  }
