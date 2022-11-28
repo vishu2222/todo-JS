@@ -1,5 +1,5 @@
 {
-  "name": "static",
+  "name": "todo-vue-mongo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
