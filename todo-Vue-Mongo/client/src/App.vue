@@ -33,12 +33,7 @@ export default {
       this.id += 1
       this.todosArr.push({ 'id': this.id, 'txt': todoTxtInput })
     }
-  },
-
-  mounted() {
-
   }
-
 }
 </script>
 
