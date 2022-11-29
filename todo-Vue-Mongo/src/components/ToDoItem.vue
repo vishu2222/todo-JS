@@ -1,11 +1,13 @@
 <!-- template start-->
 <template>
     <div class="todoItemDiv" :id="'item'+ this.item.id">
-        <div class="entryDiv">
+
+        <div class="entryDiv" @click="togglePropertyDisplay">
             <input type="checkbox" class="itemCheckbox" v-model="checkbox">
             <input type="text" class="todoTxtInput" v-model="todoTxtInput">
         </div>
-        <div class="propertiesDiv">
+
+        <div class="propertiesDiv" v-if="showProperties" @click.self="togglePropertyDisplay">
             <textarea name="" id="" cols="30" rows="10" v-model="notes"></textarea>
             <label for="">Due Date: </label>
             <input type="date" v-model="dueDate">
@@ -18,6 +20,7 @@
             </select>
             <button>Delete</button>
         </div>
+        
     </div>
 </template>
 
@@ -26,25 +29,25 @@
 export default {
     data() {
         return {
-            id: '',
-            checkbox: '',
-            todoTxtInput: '',
-            dueDate: '',
-            notes: '',
-            priority: ''
+            id: this.item.id,
+            checkbox: this.item.checkbox,
+            todoTxtInput: this.item.txt,
+            dueDate: this.item.date,
+            notes: this.item.notes,
+            priority: this.item.priority,
+            showProperties: false
         }
     },
+
     props: ['item'],
-    mounted () {
-        this.id = this.item.id
-        this.todoTxtInput = this.item.txt
-        this.checkbox = this.item.checkbox
-        this.notes = this.item.notes
-        this.dueDate = this.item.date
-        this.priority = this.item.priority
+
+    methods: {
+        togglePropertyDisplay () {
+            this.showProperties = !this.showProperties 
+        }
     }
 }
-
+// console.log(this.item.priority)
 </script>
     
 <!-- style start-->
@@ -63,7 +66,6 @@ export default {
 }
 
 .propertiesDiv {
-    /* display: none; */
     margin-top: 20px;
     margin-left: 20px;
 }
