@@ -2,7 +2,7 @@
 <template>
     <div class="todoItemDiv" :id="'item'+ this.item.id">
 
-        <div class="todoEntryDiv" @click="togglePropertyDisplay">
+        <div class="todoEntryDiv" @click.self="togglePropertyDisplay">
             <input type="checkbox" class="itemCheckbox" v-model="checkbox">
             <input type="text" class="todoTxtInput" v-model="todoTxtInput">
         </div>
@@ -20,7 +20,7 @@
             </select>
             <button>Delete</button>
         </div>
-        
+
     </div>
 </template>
 
