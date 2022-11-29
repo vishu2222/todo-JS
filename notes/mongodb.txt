@@ -1,0 +1,79 @@
+sudo systemctl start mongod // start
+
+sudo systemctl status mongod // status
+
+sudo systemctl enable mongod // starts on system reboot
+
+sudo systemctl stop mongod  // stop
+
+sudo systemctl restart mongod // restart
+
+mongosh //
+
+
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongodb
+--------------------------------------------------
+
+
+
+use test
+show collections
+
+db.dropDatabase() // drop the current database
+use mydatabase    // creates a new database with name mydatabase or loads if it already exists
+show dbs          // shows existing non-empth dbs
+db 				  // shows the current database
+db.createCollection('posts') // create a collection with name posts
+show collections  // shows the collections
+// insert a document or a row into the collecton
+db.posts.insert({
+	title: 'post one',
+	arr: ['1','2'],
+	date: Date()
+})
+// insert many
+db.posts.insertMany([
+ 	{
+
+ 	},
+ 	{
+
+ 	}
+])
+// find data
+db.posts.find().pretty() // show all data
+
+db.posts.find({id:'5'}) // matching by condiction
+
+db.posts.find().sort({name:1}) // 1 for ascending and -1 for descending
+
+db.posts.find().count()  // to count the no of documents
+
+db.posts.find().limit(2)  // limit to two outputs
+
+db.posts.find().forEach(function(doc) { print('BlogPost:' + doc.title)}) // loop
+
+db.posts.findOne({category: 'News'}) // returns the first one
+
+db.posts.update({title: 'post one'}, { title: 'post one', date: Date()}, {upsert: true}) // update 3rd parameter for insertation if not found
+
+// update set
+db.posts.update({title: 'post2'}, 
+	{
+		$set: {
+			body: 'Body of post2'
+		}
+	})
+
+// increment a value // increment likes by 2
+
+db.posts.update({title:'post one'}, {$inc: {likes: 2} })
+
+// rename // rename likes to views
+
+db.posts.update({title:'post one'}, {$rename: {likes: 'views'} })
+
+// remove
+
+db.posts.remove({title: 'post four'}) // remove a record
