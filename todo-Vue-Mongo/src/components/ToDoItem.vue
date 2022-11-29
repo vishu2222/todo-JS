@@ -2,21 +2,21 @@
 <template>
     <div class="todoItemDiv" :id="'item'+ this.item.id">
 
-        <div class="entryDiv" @click="togglePropertyDisplay">
+        <div class="todoEntryDiv" @click="togglePropertyDisplay">
             <input type="checkbox" class="itemCheckbox" v-model="checkbox">
             <input type="text" class="todoTxtInput" v-model="todoTxtInput">
         </div>
 
         <div class="propertiesDiv" v-if="showProperties" @click.self="togglePropertyDisplay">
-            <textarea name="" id="" cols="30" rows="10" v-model="notes"></textarea>
+            <textarea name="" id="" cols="30" rows="10" v-model="notes" placeholder="Notes"></textarea>
             <label for="">Due Date: </label>
             <input type="date" v-model="dueDate">
             <label for="">priority</label>
             <select name="" id="" v-model="priority">
-                <option value="">None</option>
-                <option value="">Low</option>
-                <option value="">Medium</option>
-                <option value="">High</option>
+                <option>None</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
             </select>
             <button>Delete</button>
         </div>
@@ -44,10 +44,13 @@ export default {
     methods: {
         togglePropertyDisplay () {
             this.showProperties = !this.showProperties 
+        },
+        print () {
+            console.log(this.priority)
         }
     }
 }
-// console.log(this.item.priority)
+// console.log(this.notes)
 </script>
     
 <!-- style start-->
@@ -61,7 +64,7 @@ export default {
     border-radius: 14px;
 }
 
-.entryDiv {
+.todoEntryDiv {
     padding-bottom: 8px;
 }
 
