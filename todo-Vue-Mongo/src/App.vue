@@ -4,7 +4,7 @@
 
   <div id="todoContainer">
     <div v-for="todo in todosArr" :key="todo.id">
-      <TodoItem></TodoItem>
+      <TodoItem :item =todo></TodoItem>
     </div>
   </div>
 
@@ -20,8 +20,8 @@ export default {
     return {
       id: 1,
       todosArr: [
-        { "id": '1', "txt": "todo1", "date": null, "priority": null, "notes": null, "checkbox": false },
-        { "id": '2', "txt": "todo2", "date": null, "priority": null, "notes": null, "checkbox": true }
+        { "id": '1', "txt": "todo1", "date": '2022-10-10', "priority": "Medium", "notes": 'notes1', "checkbox": true },
+        { "id": '2', "txt": "todo2", "date": '2022-11-11', "priority": "None", "notes": 'notes2', "checkbox": true }
       ]
     }
   },
