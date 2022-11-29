@@ -1,22 +1,24 @@
 <!-- template -->
 <template>
-    <form @submit.prevent = "submitNewTodo" class="todoForm">
+    <form @submit.prevent="submitNewTodo" class="todoForm">
         <label class="todoLable"><strong>To-Do</strong></label>
         <input class="todoInput" type="text" required v-model="todoTxtInput" placeholder="what needs to be done?">
         <button class="submitTodo">Add</button>
     </form>
+    <br>
 </template>
 
 <!-- script -->
 <script>
 export default {
-    data () {
+    data() {
         return {
             todoTxtInput: ''
         }
     },
+    emits: ["todoAdded"],
     methods: {
-        submitNewTodo () {
+        submitNewTodo() {
             this.$emit('todoAdded', this.todoTxtInput)
             this.todoTxtInput = ''
         }
@@ -25,8 +27,7 @@ export default {
 </script>
 
 <!-- style -->
-<style>
-
+<style scoped>
 .todoForm {
     margin-left: 35%;
     margin-right: 10%;
