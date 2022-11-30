@@ -13,7 +13,7 @@ const todoSchema = new mongoose.Schema( {
   checkbox: Boolean
 })
 
-const todoModel =  mongoose.model('todos', todoSchema) // todos is the collection name 
+const todoModel = mongoose.model('todos', todoSchema) // todos is the collection name 
 
 export function getAll () {
   return todoModel.find()
