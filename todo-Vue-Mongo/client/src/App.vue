@@ -1,6 +1,6 @@
 <!-- template start-->
 <template>
-  <ToDoForm @todoAdded="addTodo"></ToDoForm>
+  <ToDoForm @todoAdded="addTodo"></ToDoForm> <!-- addTodo is called with todoTxtInput emitted from todoform component-->
 
   <div id="todoContainer">
     <div v-for="todo in todosArr" :key="todo.id">
@@ -14,26 +14,34 @@
 <script>
 import ToDoForm from './components/ToDoForm.vue'
 import TodoItem from './components/ToDoItem.vue'
+import { fetchTodos, requestAddTodo } from './requests.js'
 
 export default {
+
+  // data
   data() {
     return {
-      id: 1,
-      todosArr: [
-        { "id": '1', "txt": "todo1", "date": '2022-10-10', "priority": "Medium", "notes": 'notes1', "checkbox": true },
-        { "id": '2', "txt": "todo2", "date": '2022-11-11', "priority": "None", "notes": 'notes2', "checkbox": true }
-      ]
+      id: 0,
+      todosArr: []
     }
   },
 
+  // components
   components: { ToDoForm, TodoItem },
 
+  // methods
   methods: {
-    addTodo(todoTxtInput) {
-      this.id += 1
-      this.todosArr.push({ 'id': this.id, 'txt': todoTxtInput })
+    addTodo(todoTxt) {
+      const result = requestAddTodo(todoTxt)
     }
+  },
+
+  // mount
+  async beforeMount () {
+    this.todosArr = await fetchTodos()
+    console.log(this.todosArr)
   }
+
 }
 </script>
 
