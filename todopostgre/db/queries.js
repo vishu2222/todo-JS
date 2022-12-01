@@ -1,5 +1,5 @@
-import pg from 'pg';
-const Client = pg.Client;
+import pg from 'pg'
+const Client = pg.Client
 
 const client = new Client({
   user: 'todouser',
@@ -9,7 +9,7 @@ const client = new Client({
   port: 5432
 })
 
-export function connectDb () {  
+export function connectDb () {
   client.connect((err) => {
     if (err) console.log(err)
     else console.log('connected to dataBase')
@@ -17,8 +17,8 @@ export function connectDb () {
 }
 
 export async function getTodos () {
-    const todos = await client.query('SELECT * FROM todoSchema.todotable ORDER BY id;')
-    return todos.rows
+  const todos = await client.query('SELECT * FROM todoSchema.todotable ORDER BY id;')
+  return todos.rows
 }
 
 export async function insertTodo (todo) {
@@ -58,7 +58,7 @@ export async function getPending () {
   return await client.query(query)
 }
 
-export async function deleteAll() {
-  const query = `TRUNCATE todoschema.todotable;`
+export async function deleteAll () {
+  const query = 'TRUNCATE todoschema.todotable;'
   return await client.query(query)
 }
