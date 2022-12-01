@@ -118,3 +118,27 @@ watch: {
       console.log(`new count is: ${newCount}`)
     }
   }
+
+
+
+
+//............... vue vs vanilla-js........................
+
+//
+<button ref="myButton">Click</button> // registering ref 
+this.$refs.myButton.innerText = 'Add'
+
+<button id=1 ref="myButton">Click</button> 
+mybtn = document.querySelector('#1')
+mybtn.innerText = 'Add'
+
+// 
+
+<h1 id='htag'>hello<h1>
+document.getElementById('htag').innerText='hello' // updates dom
+
+<h1 ref="htag">hello<h1>
+this.$refs.htag.innerText = 'hello' // doesnt update dom, it compoares the component instance for changes and then updates dom
+
+//
+
