@@ -1,6 +1,6 @@
 <!-- template start-->
 <template>
-    <div class="todoItemDiv" :id="'item'+ this.item.id">
+    <div class="todoItemDiv" :id="'item'+ this.id">
 
         <div class="todoEntryDiv" @click.self="togglePropertyDisplay">
             <input type="checkbox" class="itemCheckbox" v-model="checkbox">
@@ -29,7 +29,7 @@
 export default {
     data() {
         return {
-            id: this.item.id,
+            id: this.item._id,
             checkbox: this.item.checkbox,
             todoTxtInput: this.item.txt,
             dueDate: this.item.date,
@@ -46,7 +46,7 @@ export default {
             this.showProperties = !this.showProperties 
         },
         print () {
-            console.log(this.priority)
+            console.log(this.id)
         }
     }
 }
