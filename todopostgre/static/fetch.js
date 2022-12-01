@@ -1,5 +1,4 @@
 
-
 export async function fetchTodos () {
   const url = 'http://localhost:3000/todos'
   const response = await fetch(url)
@@ -9,9 +8,9 @@ export async function fetchTodos () {
 
 export async function postTodo (inputTxt) {
   const url = '/addTodo'
-  let res = await fetch(url, {
+  const res = await fetch(url, {
     method: 'POST',
-    headers:{
+    headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -33,12 +32,12 @@ export async function requestUpdate (property, val, todo) {
 
 export async function requestDel (id) {
   const url = `/delete/:${String(id)}`
-  const res = await fetch(url, { method: 'DELETE' } )
+  const res = await fetch(url, { method: 'DELETE' })
   return res
 }
 
 export async function requestDelDone () {
-  const res = await fetch('/deleteDone', {method: 'DELETE'})
+  const res = await fetch('/deleteDone', { method: 'DELETE' })
   if (res.status === 200) { return 'done' }
   throw new Error('invalid response')
 }
@@ -56,6 +55,6 @@ export async function requestPending () {
 }
 
 export async function deleteAllTodos () {
-  const res = await fetch('/deleteAll', { method: 'DELETE'})
+  const res = await fetch('/deleteAll', { method: 'DELETE' })
   return res.status
 }
