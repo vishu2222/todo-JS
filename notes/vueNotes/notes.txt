@@ -16,8 +16,17 @@ npm run dev // open the browser at http://localhost:5173/
 npm install -g @vue/cli
 vue create modal-project
 
-// ...................................... https://vuejs.org/tutorial/
-Declarative rendering:
+//...................................
+
+SFC:
+
+An SFC is a reusable self-contained block of code that encapsulates HTML, CSS and JavaScript that belong together.
+
+
+
+Declarative rendering and reactive state::
+
+declarative rendering: using a template syntax that extends HTML, we can describe how the HTML should look like based on JavaScript state. When the state changes, the HTML updates automatically.
 
 export default {
     data() {
@@ -31,11 +40,23 @@ export default {
   <h1>{{ message }}</h1>
 </template>
 
-// ......................................
+templates containing values returned by data() are dynamically rendered. {{values}}
+
+
+//..................................................
 Attribute Binding:
+html element attributes can be set dynamically
 
 <div v-bind:id="dynamicId"></div>
 <div :id="dynamicId"></div>
+
+if dyamicId = myId in data () {}
+in styles use
+#myId{
+  
+} to change the properties dynamically by varying value of the ID
+
+
 
 // ......................................
 Event Listeners:
@@ -54,10 +75,13 @@ export default {
 
 // ......................................
 Form Bindings
+data() {
+    return {
+      text: ''
+    }
 
 <input v-model="text">
-v-model automatically syncs the <input>'s value with the bound state, so we no longer need to use an event handler for that.
-
+v-model automatically syncs the <input>'s value with the bound state.
 
 // .......................................
 Conditional rendering:
