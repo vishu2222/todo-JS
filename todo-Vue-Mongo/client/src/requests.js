@@ -1,6 +1,7 @@
 
 export async function fetchTodos () {
-  const res = await fetch('http://localhost:3000/')
+  const url = 'http://localhost:3000/'
+  const res = await fetch(url)
   const data = await res.json()
   return data
 }
@@ -28,7 +29,7 @@ export async function reqPropertyUpdate (id, property, val) {
   const result = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
     method: 'PATCH',
-    body: JSON.stringify({ todoProperty: property, todoVal: val })
+    body: JSON.stringify({ todoProperty: property, todoPropertyVal: val })
   })
   return result
 }
