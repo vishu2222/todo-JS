@@ -11,8 +11,8 @@ submitButton.addEventListener('click', async (event) => {
   if (todoInput.value.length !== 0) {
     const res = await postTodo(todoInput)
     if (res.status === 200) {
-    todosArr = await fetchTodos()
-    displayTodos()
+      todosArr = await fetchTodos()
+      displayTodos()
     } else { console.log('unable to post')}
     todoInput.value = ''
   }
@@ -225,7 +225,7 @@ statusButton.addEventListener('click', async () => {
     todosArr = await requestPending()
     displayTodos()
     statusButton.textContent = 'Show All'
-  } else if (statusButton.textContent === 'Show All'){
+  } else if (statusButton.textContent === 'Show All') {
     todosArr = await fetchTodos()
     displayTodos()
     statusButton.textContent = 'Show Completed'
@@ -236,7 +236,7 @@ const DeleteAll = document.getElementById('DeleteAll')
 DeleteAll.addEventListener('click', async () => {
   // alert('delete all?')
   const status = await deleteAllTodos()
-  if (status === 200 ) {
+  if (status === 200) {
     todosArr = await fetchTodos()
     displayTodos()
   }
