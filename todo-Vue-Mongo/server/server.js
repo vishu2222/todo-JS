@@ -15,7 +15,7 @@ app.get('/', async (req, res) => {
 
 app.post('/addTodo', async (req, res) => {
   try {
-    await insertTodo(req.body)
+    await insertTodo(req.body.txt)
     return res.sendStatus(200)
   } catch (err) { res.sendStatus(500) }
 })
@@ -28,8 +28,10 @@ app.delete('/delete/:id', async (req, res) => {
 })
 
 app.patch('/update/:id', async (req, res) => {
-  updateTodo(req.params.id, req.body.todoProperty, req.body.todoVal)
-  res.sendStatus(200)
+  try {
+    await updateTodo(req.params.id, req.body.todoProperty, req.body.todoPropertyVal)
+    res.sendStatus(200)
+  } catch (err) { console.log('cant update'); res.sendStatus(500) }
 })
 
 app.listen(3000, () => { console.log('Listening on port: 3000') })
