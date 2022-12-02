@@ -1,24 +1,23 @@
 <!-- template start-->
 <template>
     <div class="todoItemDiv" :id="'item'+ this.id">
-
         <div class="todoEntryDiv" @click.self="togglePropertyDisplay">
-            <input type="checkbox" class="itemCheckbox" v-model="checkbox">
-            <input type="text" class="todoTxtInput" v-model="todoTxtInput">
+            <input type="checkbox" class="itemCheckbox" v-model="checkbox" @change="requestUpdate('checkbox', this.checkbox)">
+            <input type="text" class="todoTxtInput" v-model="todoTxtInput" @change="requestUpdate('txt', this.todoTxtInput)">
         </div>
 
         <div class="propertiesDiv" v-if="showProperties" @click.self="togglePropertyDisplay">
-            <textarea name="" id="" cols="30" rows="10" v-model="notes" placeholder="Notes"></textarea>
-            <label for="">Due Date: </label>
-            <input type="date" v-model="dueDate">
-            <label for="">priority</label>
-            <select name="" id="" v-model="priority">
+            <textarea cols="30" rows="10" v-model="notes" placeholder="Notes" @change="requestUpdate('notes', this.notes)"></textarea>
+            <label>Due Date: </label>
+            <input type="date" v-model="dueDate" @change="requestUpdate('date', this.dueDate)">
+            <label>priority</label>
+            <select v-model="priority" @change="requestUpdate('priority', this.priority)">
                 <option>None</option>
                 <option>Low</option>
                 <option>Medium</option>
                 <option>High</option>
             </select>
-            <button>Delete</button>
+            <button @click="deleteTodo">Delete</button>
         </div>
 
     </div>
@@ -26,6 +25,7 @@
 
 <!-- script start-->
 <script>
+import { requestDelete, reqPropertyUpdate } from '../requests.js'
 export default {
     data() {
         return {
@@ -41,18 +41,23 @@ export default {
 
     props: ['item'],
 
+    emits: ["reRender"],
+    
     methods: {
         togglePropertyDisplay () {
             this.showProperties = !this.showProperties 
         },
-        print () {
-            console.log(this.id)
+        async deleteTodo () {
+            await requestDelete(this.id)
+            this.$emit('reRender')
+        },
+        requestUpdate (property, val) {
+            reqPropertyUpdate(this.id, property, val)
         }
     }
 }
-// console.log(this.notes)
 </script>
-    
+
 <!-- style start-->
 <style>
 .todoItemDiv {
