@@ -1,23 +1,25 @@
 <!-- template start-->
 <template>
     <div class="todoItemDiv" :id="'item'+ this.id">
+        
         <div class="todoEntryDiv" @click.self="togglePropertyDisplay">
             <input type="checkbox" class="itemCheckbox" v-model="checkbox" @change="requestUpdate('checkbox', this.checkbox)">
             <input type="text" class="todoTxtInput" v-model="todoTxtInput" @change="requestUpdate('txt', this.todoTxtInput)">
         </div>
 
         <div class="propertiesDiv" v-if="showProperties" @click.self="togglePropertyDisplay">
-            <textarea cols="30" rows="10" v-model="notes" placeholder="Notes" @change="requestUpdate('notes', this.notes)"></textarea>
-            <label>Due Date: </label>
-            <input type="date" v-model="dueDate" @change="requestUpdate('date', this.dueDate)">
-            <label>priority</label>
-            <select v-model="priority" @change="requestUpdate('priority', this.priority)">
+            <textarea cols="30" rows="10" v-model="notes" placeholder="Notes" @change="requestUpdate('notes', this.notes)" class="area">
+            </textarea>
+            <label class="dateLabel">Due Date: </label>
+            <input type="date" v-model="dueDate" @change="requestUpdate('date', this.dueDate)" class="date">
+            <label class="priorityLabel">priority</label>
+            <select v-model="priority" @change="requestUpdate('priority', this.priority)" class="priority">
                 <option>None</option>
                 <option>Low</option>
                 <option>Medium</option>
                 <option>High</option>
             </select>
-            <button @click="deleteTodo">Delete</button>
+            <button @click="deleteTodo" class="delButton">Delete</button>
         </div>
 
     </div>
@@ -27,6 +29,7 @@
 <script>
 import { requestDelete, reqPropertyUpdate } from '../requests.js'
 export default {
+    // data
     data() {
         return {
             id: this.item._id,
@@ -39,10 +42,13 @@ export default {
         }
     },
 
+    // props
     props: ['item'],
 
+    // emits
     emits: ["reRender"],
-    
+
+    // methods
     methods: {
         togglePropertyDisplay () {
             this.showProperties = !this.showProperties 
@@ -91,5 +97,43 @@ export default {
     font-size:large;
     width: 15px;
     height: 15px;
+}
+
+.area {
+    margin-bottom: 10px;
+}
+
+.dateLabel {
+    position: relative;
+    bottom: 130px;
+    left: 50px;
+}
+
+.date {
+    position: relative;
+    bottom: 133px;
+    left: 50px;
+}
+
+.priorityLabel {
+    position: relative;
+    bottom: 133px;
+    left: 70px;
+}
+
+.priority {
+    position: relative;
+    bottom: 133px;
+    left: 75px;
+}
+
+.delButton {
+    position: relative;
+    bottom: 133px;
+    left: 85px;
+}
+
+.delButton:hover {
+    background-color: #C84B31;
 }
 </style>
