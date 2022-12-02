@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
 mongoose.connect('mongodb://localhost:27017/todoDb')
-  .then(console.log('connected to DB on port 27017:'))
-  .catch(err => console.log('Couldnt connect to db:', err))
+  .then(console.log('connected to DataBase:'))
+  .catch(err => console.log('Couldn\'t connect to DataBase:', err))
 
 const todoSchema = new mongoose.Schema({
   txt: String,
@@ -18,14 +18,13 @@ export async function getAllTodos () {
   return await todoModel.find()
 }
 
-export async function insertTodo (todo) {
-  const postTodo = todoModel({ txt: todo.txt })
+export async function insertTodo (todoTxt) {
+  const postTodo = todoModel({ txt: todoTxt })
   return await postTodo.save()
 }
 
 export async function deleteTodo (id) {
-  const delTodo = await todoModel.deleteOne({ _id: id })
-  if (delTodo.deletedCount === 0) { throw Error }
+  const delTodo = await todoModel.deleteOne({ _id: id }) // if (delTodo.deletedCount === 0) { throw Error }
   return delTodo.deletedCount
 }
 
@@ -33,4 +32,5 @@ export async function updateTodo (id, property, val) {
   const updateObject = { }
   updateObject[property] = val
   const updateTodoProperty = await todoModel.findByIdAndUpdate({ _id: id }, updateObject)
+  return updateTodoProperty
 }
