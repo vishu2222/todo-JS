@@ -14,3 +14,21 @@ export async function requestAddTodo (todoTxt) {
   })
   return result
 }
+
+export async function requestDelete (id) {
+  const url = 'http://localhost:3000/delete/' + id
+  const result = await fetch(url, {
+    method: 'DELETE'
+  })
+  return result
+}
+
+export async function reqPropertyUpdate (id, property, val) {
+  const url = 'http://localhost:3000/update/' + id
+  const result = await fetch(url, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'PATCH',
+    body: JSON.stringify({ todoProperty: property, todoVal: val })
+  })
+  return result
+}
