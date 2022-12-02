@@ -22,3 +22,15 @@ export async function insertTodo (todo) {
   const postTodo = todoModel({ txt: todo.txt })
   return await postTodo.save()
 }
+
+export async function deleteTodo (id) {
+  const delTodo = await todoModel.deleteOne({ _id: id })
+  if (delTodo.deletedCount === 0) { throw Error }
+  return delTodo.deletedCount
+}
+
+export async function updateTodo (id, property, val) {
+  const updateObject = { }
+  updateObject[property] = val
+  const updateTodoProperty = await todoModel.findByIdAndUpdate({ _id: id }, updateObject)
+}
