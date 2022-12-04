@@ -17,7 +17,6 @@
 <script>
 import ToDoForm from './components/ToDoForm.vue'
 import TodoItem from './components/ToDoItem.vue'
-import ToDoFooter from './components/ToDoFooter.vue'
 import { fetchTodos, requestAddTodo, requestCompleted, requestPending, requestDeleteDone } from './requests.js'
 
 export default {
@@ -31,7 +30,7 @@ export default {
   },
 
   // components
-  components: { ToDoForm, TodoItem, ToDoFooter },
+  components: { ToDoForm, TodoItem },
 
   // methods
   methods: {
