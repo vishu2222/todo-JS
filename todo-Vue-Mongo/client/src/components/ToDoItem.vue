@@ -1,10 +1,10 @@
 <!-- template start-->
 <template>
     <div class="todoItemDiv" :id="'item'+ this.id">
-        
+
         <div class="todoEntryDiv" @click.self="togglePropertyDisplay">
             <input type="checkbox" class="itemCheckbox" v-model="checkbox" @change="requestUpdate('checkbox', this.checkbox)">
-            <input type="text" class="todoTxtInput" v-model="todoTxtInput" @change="requestUpdate('txt', this.todoTxtInput)">
+            <input type="text" :style="txtStyle" class="todoTxtInput" v-model="todoTxtInput" @change="requestUpdate('txt', this.todoTxtInput)">
         </div>
 
         <div class="propertiesDiv" v-if="showProperties" @click.self="togglePropertyDisplay">
@@ -38,7 +38,8 @@ export default {
             dueDate: this.item.date,
             notes: this.item.notes,
             priority: this.item.priority,
-            showProperties: false
+            showProperties: false,
+            txtStyle: 'text-decoration:none' // line-through
         }
     },
 
@@ -59,6 +60,7 @@ export default {
         },
         requestUpdate (property, val) {
             reqPropertyUpdate(this.id, property, val)
+            this.$emit('reRender')
         }
     }
 }
