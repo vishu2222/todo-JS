@@ -18,14 +18,26 @@ export async function getAllTodos () {
   return await todoModel.find()
 }
 
+export async function getCompleted () {
+  return await todoModel.find({ checkbox: true })
+}
+
+export async function getPending () {
+  return await todoModel.find({ checkbox: false })
+}
+
 export async function insertTodo (todoTxt) {
-  const postTodo = todoModel({ txt: todoTxt })
+  const postTodo = todoModel({ txt: todoTxt, checkbox: false })
   return await postTodo.save()
 }
 
 export async function deleteTodo (id) {
   const delTodo = await todoModel.deleteOne({ _id: id }) // if (delTodo.deletedCount === 0) { throw Error }
   return delTodo.deletedCount
+}
+
+export async function deleteDone () {
+  await todoModel.deleteMany({ checkbox: true })
 }
 
 export async function updateTodo (id, property, val) {

@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllTodos, insertTodo, deleteTodo, updateTodo } from './db/queries.js'
+import { getAllTodos, insertTodo, deleteTodo, updateTodo, deleteDone, getCompleted, getPending } from './db/queries.js'
 import cors from 'cors'
 
 const app = express()
@@ -13,6 +13,20 @@ app.get('/', async (req, res) => {
   } catch (err) { res.sendStatus(500) }
 })
 
+app.get('/completed', async (req, res) => {
+  try {
+    const todos = await getCompleted()
+    res.json(todos)
+  } catch (err) { res.sendStatus(500)}
+})
+
+app.get('/pending', async (req, res) => {
+  try {
+    const todos = await getPending()
+    res.json(todos)
+  } catch (err) { res.sendStatus(500)}
+})
+
 app.post('/addTodo', async (req, res) => {
   try {
     await insertTodo(req.body.txt)
@@ -23,6 +37,13 @@ app.post('/addTodo', async (req, res) => {
 app.delete('/delete/:id', async (req, res) => {
   try {
     await deleteTodo(req.params.id)
+    res.sendStatus(200)
+  } catch (err) { console.log('cant delete'); res.sendStatus(500) }
+})
+
+app.delete('/deleteDone', async (req, res) => {
+  try {
+    await deleteDone()
     res.sendStatus(200)
   } catch (err) { console.log('cant delete'); res.sendStatus(500) }
 })
