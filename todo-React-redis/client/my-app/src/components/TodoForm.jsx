@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./TodoForm.css";
 
 function TodoForm() {
   // state
@@ -12,17 +13,20 @@ function TodoForm() {
 
   // return
   return (
-    <div id="todoForm" style={{ backgroundColor: "green" }}>
+    <div id="todoForm">
       <form onSubmit={(e) => e.preventDefault()}>
-        <label>ToDo</label>
+        <label id="todoLabel">ToDo</label>
         <br />
         <input
           type="text"
+          className="inputTxt"
           placeholder="what needs to be done?"
           value={todoInput}
           onChange={(e) => setTodoInput(e.target.value)}
         />
-        <button onClick={addTodo}>Add</button>
+        <button id="addButton" onClick={addTodo}>
+          Add
+        </button>
       </form>
     </div>
   );
