@@ -1,14 +1,8 @@
-import './App.css'
-// import TodoForm from './components/TodoForm.js'
+import "./App.css"
+import TodoForm from "./components/TodoForm.js"
 
-function App () {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>Edit</p>
-      </header>
-    </div>
-  )
+function App() {
+  return <TodoForm />
 }
 
 export default App
