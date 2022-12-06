@@ -1,0 +1,91 @@
+REF: reactjs.org
+
+// JSX
+* const element = <p>abc {JavaScript Expression}</p>
+* JSX is converted to JavaScript.
+* <div className="sidebar" /> --------> React.createElement('div', {'className': 'sideBar'})
+* components begin with capital Letters unlike html elements say <div> that starts with small letters. 
+* JSX <Component /> expression expects Component to be in the scope. 'Component' tag is compiled to its named reference
+
+// .....................................
+// components and props:
+* When React sees an element representing a user-defined component, it passes JSX attributes and 
+children to this component as a single object. We call this object “props”.
+
+function Welcome (props) {
+    return <h1>Hello, {props.name}</h1>
+}
+
+const root = ReactDom.createRoot(document.getElementById('root'));
+const element = <Welcome name='props'>
+root.render(element);
+
+* If no value if passed to a prop its default value is true
+* spread props
+    function App1(props) {
+        return <Greeting {...props}/>
+    }
+
+* select one and spread others
+    function App2(props) {
+        const {kind, ...others} = props;
+        return <button className={kind} {...others} />
+    }
+
+//............................
+// composing components:                          // helps reusing components
+function Welcome (props) {
+    return <h1>Hello, {props.name}</h1>
+}
+
+function App() {
+    return (
+        <div>
+        <Welcome name='sara'>
+        <Welcome name='worls'>
+        </div>
+    )
+}
+
+* All react components must act like pure functions wrt their props
+
+// State and Life-cycle // https://www.simplilearn.com/tutorials/reactjs-tutorial/reactjs-state#:~:text=HackerEarthEXPLORE%20COURSE-,What%20Is%20'State'%20in%20ReactJS%3F,%2C%20the%20component%20re%2Drenders.
+* state is similar to props but it is private and fully controlled by props
+* The state is a built-in react object used to contain data about the component
+* a change in state re-renders the component. State modifies with user actions, event-listeners etc.
+* this.setState() can change value of state object.
+
+// MOUNTING:
+// componentWillMount():
+* This function is called right before we mount the component on the DOM. So after this method executes,
+ the component gets mounted on the DOM. It executes this method before the first render of the React 
+ application. So all the tasks that have to be done before the component mounts are defined in this method.
+
+// render():
+*This function mounts the component on the browser. 
+
+// componentDidMount():
+* We invoke this function right after the component is mounted on the DOM i.e., this function gets called once 
+after the render() function is executed for the first time. Generally, in React applications, we do the 
+API calls within this method.
+
+// UPDATING:
+* setState():
+* This function can be called explicitly at any moment. This function is used to update the state of a component.
+
+* shouldComponentUpdate():
+* This function is called before rendering a component and tells React whether it should update the component
+ on receiving new props or state. It takes the new Props and new State as the arguments and returns whether
+  or not to re-render the component by returning either True or False.
+
+* componentWillUpdate():
+* This function is called once before the render() function is executed after the update of State or Props.
+
+* componentDidUpdate():
+* This function is called once after the render() function is executed after the update of State or Props.
+
+* componentWillUnmount():
+* This function is called once before we remove the component from the page and this marks the end of the life-cycle.
+
+
+

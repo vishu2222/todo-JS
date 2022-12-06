@@ -1,0 +1,9 @@
+npx create-react-app .                       // npx runs the command rather than downloading something // . indicates to use the current folder we are in
+npm start                                    // development server
+
+//..................
+npx create-react-app my-app
+cd my-app
+npm start
+
+
