@@ -1,22 +1,30 @@
 import "./App.css";
 import TodoForm from "./components/TodoForm.jsx";
 import TodoItem from "./components/TodoItem.jsx";
-
-const todos = [
-  {
-    id: 1,
-    checkbox: true,
-    txt: "todo1",
-    date: "2022-11-15",
-    priority: "Medium",
-    notes: "notes1",
-  },
-];
+import { useState } from "react";
 
 export default function App() {
+  const [todos, setTodos] = useState(
+    JSON.parse(window.localStorage.getItem("todosarr"))
+  );
+
+  // methods
+  function addTodoTxt(txt) {
+    const todoId = todos.reduce((max, todo) => {
+      if (todo.id > max) {
+        max = todo.id;
+      }
+      return max + 1;
+    }, 0);
+    todos.push({ id: todoId, txt: txt });
+    window.localStorage.setItem("todosarr", JSON.stringify(todos));
+    console.log(todos);
+  }
+
+  // component return
   return (
     <div>
-      <TodoForm />
+      <TodoForm todoTxt={addTodoTxt} />
       <div id="todoContainer">
         <div className="itemDiv">
           {todos.map((item, index) => {
