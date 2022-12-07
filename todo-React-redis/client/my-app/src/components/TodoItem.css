@@ -1,4 +1,47 @@
 .todoItem {
-    background-color: #C4D7E0;
-    
+    background-color: #C4D7E0;   
+}
+
+.txtDiv {
+    padding-top: 10px;
+}
+
+.todoTxt-TodoItem {
+    width:600px;
+    background-color: #c4d7e0;
+    border:none;
+}
+
+.properties {
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+
+.notes {
+    display: inline-block;
+}
+
+.dateLabel {
+    position: relative;
+    bottom: 130px;
+    left: 20px;
+}
+
+.dateInput {
+    position: relative;
+    bottom: 130px;
+    left: 25px;
+}
+
+.priorityLabel {
+    position: relative;
+    bottom: 130px;
+    left: 40px;
+}
+
+.priority {
+    position: relative;
+    bottom: 130px;
+    left: 45px;
 }
