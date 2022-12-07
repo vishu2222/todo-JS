@@ -19,6 +19,7 @@ function TodoForm() {
         <br />
         <input
           type="text"
+          required
           className="inputTxt"
           placeholder="what needs to be done?"
           value={todoInput}
