@@ -1,46 +1,70 @@
 import { useState } from "react";
 import "./TodoItem.css";
 
-function TodoItem({ item }) {
+export default function TodoItem({ item }) {
   // useState
   const [txt, setTxt] = useState(item.txt);
   const [checkbox, setCheckbox] = useState(item.checkbox);
   const [notes, setNotes] = useState(item.notes);
   const [date, setDate] = useState(item.date);
   const [priority, setPriority] = useState(item.priority);
-  // return
+  const [displayPropertyDiv, setDisplayProperty] = useState(false);
+
+  // methods
+  function toggleDisplay(e) {
+    if (e.target.tagName === "DIV") {
+      setDisplayProperty(!displayPropertyDiv);
+    }
+  }
+
+  // react component return
   return (
-    <div className="todoItem">
-      <input
-        type="checkbox"
-        checked={checkbox}
-        onChange={(e) => setCheckbox(e.target.checked)}
-      />
-      <input type="text" value={txt} onChange={(e) => setTxt(e.target.value)} />
-      <div className="properties">
-        <textarea
-          cols="30"
-          rows="10"
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        />
-        <label>Due Date</label>
+    <div className="todoItem" onClick={toggleDisplay}>
+      <div className="txtDiv">
         <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
+          type="checkbox"
+          checked={checkbox}
+          onChange={(e) => setCheckbox(e.target.checked)}
         />
-        <label>Priority</label>
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-          <option>None</option>
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-        <button>Delete</button>
+        <input
+          className="todoTxt-TodoItem"
+          type="text"
+          value={txt}
+          onChange={(e) => setTxt(e.target.value)}
+          style={{ width: (txt.length + 10) * 8 + "px" }}
+        />
       </div>
+
+      {displayPropertyDiv && (
+        <div className="properties">
+          <textarea
+            className="notes"
+            cols="30"
+            rows="10"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+          <label className="dateLabel">Due Date</label>
+          <input
+            className="dateInput"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <label className="priorityLabel">Priority</label>
+          <select
+            className="priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option>None</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          <button>Delete</button>
+        </div>
+      )}
     </div>
   );
 }
-
-export default TodoItem;
