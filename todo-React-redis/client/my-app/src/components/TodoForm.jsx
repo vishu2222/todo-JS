@@ -1,14 +1,16 @@
 import { useState } from "react";
 import "./TodoForm.css";
 
-function TodoForm() {
+function TodoForm({ todoTxt }) {
   // state
   let [todoInput, setTodoInput] = useState("");
 
   // callback methods
   function addTodo() {
-    // console.log(todoInput);
-    setTodoInput("");
+    if (todoInput.length > 0) {
+      todoTxt(todoInput);
+      setTodoInput("");
+    }
   }
 
   // return
@@ -19,7 +21,6 @@ function TodoForm() {
         <br />
         <input
           type="text"
-          required
           className="inputTxt"
           placeholder="what needs to be done?"
           value={todoInput}
