@@ -10,6 +10,7 @@
     width:600px;
     background-color: #c4d7e0;
     border:none;
+    max-width: 80%;
 }
 
 .properties {
