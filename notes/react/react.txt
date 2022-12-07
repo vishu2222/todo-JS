@@ -8,6 +8,10 @@ REF: reactjs.org
 * JSX <Component /> expression expects Component to be in the scope. 'Component' tag is compiled to its named reference
 
 // .....................................
+creating and nesting functional components:
+
+
+//......................................
 // components and props:
 * When React sees an element representing a user-defined component, it passes JSX attributes and 
 children to this component as a single object. We call this object “props”.
@@ -52,9 +56,9 @@ function App() {
 // State and Life-cycle // https://www.simplilearn.com/tutorials/reactjs-tutorial/reactjs-state#:~:text=HackerEarthEXPLORE%20COURSE-,What%20Is%20'State'%20in%20ReactJS%3F,%2C%20the%20component%20re%2Drenders.
 
 why state is needed? // https://beta.reactjs.org/learn/state-a-components-memory
-1) Local variables dont persist between renders. i.e., when react a component second time it renders 
+1) Local variables dont persist between renders. i.e., when react renders a component second time it renders 
    it from scratch. It doesnt consider any changes made to the local variables.
-2) Changes in local variables donet trigger renders. i.e.,React doesnt automatically render the component
+2) Changes in local variables doesnt trigger renders. i.e.,React doesnt automatically render the component
    again with new data.
 
 To update a component with new data we need two things to happen
@@ -69,7 +73,7 @@ The useState Hook provides those two things:
 * const [index, setIndex] = useState(0); // [something, setSomething]
 * index is a state variable and setIndex is the setter function.
 
-* state is similar to props but it is private and fully controlled by props
+* state is similar to props but it is private and fully controlled by a component
 * The state is a built-in react object used to contain data about the component
 * a change in state re-renders the component. State modifies with user actions, event-listeners etc.
 * this.setState() can change value of state object.
@@ -81,7 +85,7 @@ The useState Hook provides those two things:
   call the function component whose state update triggered the render.
 * React does not touch the DOM if the rendering result is the same as last time.
 * A state variable’s value never changes within a render, even if its event handler’s code is asynchronous. 
-
+  i.e., state cant be remodified again and again before a render
 <button onClick={() => {
   setNumber(number + 1);
   setNumber(number + 1);
@@ -92,7 +96,25 @@ This happens because every setNumber call sees its initial state value = 0
 
 
 
-// MOUNTING:
+// https://www.knowledgehut.com/blog/web-development/introduction-to-hooks-in-react
+useEffect:
+*  The Effect Hook adds the ability to perform side effects from a functional component.
+*  useEffect(() => { // Do some task here  }); 
+*  By calling this hook we are simply telling our component to perform some tasks after a render like
+   fetching data, showing pop-ups, sending API requests and manually changing dom in react components
+ex:
+import React, {useState, useEffect} from 'react'
+export default function getTodos () {
+    const [myData, setData] = useState([])
+    useEffect(async () => {
+        const res = await fetch(todoUrl)
+        const data = await res.json()
+    })
+    return data
+}
+
+
+// MOUNTING: in earlier class components way
 // componentWillMount():
 * This function is called right before we mount the component on the DOM. So after this method executes,
  the component gets mounted on the DOM. It executes this method before the first render of the React 
