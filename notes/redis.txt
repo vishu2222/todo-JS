@@ -1,0 +1,5 @@
+sudo snap install redis
+sudo apt install redis-tools
+
+redis-cli // enter ------------->     127.0.0.1:6379>
+127.0.0.1:6379> ping      ---> PONG
