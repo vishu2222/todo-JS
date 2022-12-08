@@ -1,14 +1,18 @@
 .todoItem {
-    background-color: #C4D7E0;   
+    background-color: #C4D7E0;
+    margin-bottom: 3px;
+    border-radius: 12px;
 }
 
 .txtDiv {
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
 }
 
 .todoTxt-TodoItem {
     width:600px;
-    background-color: #c4d7e0;
+    background-color: #d4e7f0;
     border:none;
     max-width: 80%;
 }
