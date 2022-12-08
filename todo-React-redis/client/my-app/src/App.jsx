@@ -16,11 +16,20 @@ export default function App() {
       }
       return max + 1;
     }, 0);
+
     window.localStorage.setItem(
       "todosArr",
       JSON.stringify([...todos, { id: todoId, txt: txt }])
     );
+
     setTods(JSON.parse(window.localStorage.getItem("todosArr")));
+  }
+
+  function deleteTodo(id) {
+    console.log(id);
+    const newTods = todos.filter((todo) => todo.id !== id);
+    window.localStorage.setItem("todosArr", JSON.stringify(newTods));
+    setTods(newTods);
   }
 
   // component return
@@ -30,7 +39,9 @@ export default function App() {
       <div id="todoContainer">
         <div className="itemDiv">
           {todos.map((item, index) => {
-            return <TodoItem key={index} todoItem={item} />;
+            return (
+              <TodoItem key={index} todoItem={item} deleteTodo={deleteTodo} />
+            );
           })}
         </div>
       </div>
