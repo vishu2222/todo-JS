@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./TodoItem.css";
 
 export default function TodoItem({ todoItem, deleteTodo }) {
+  const id = todoItem.id;
   // useState
   const [txt, setTxt] = useState(todoItem.txt);
   const [checkbox, setCheckbox] = useState(todoItem.checkbox);
@@ -9,7 +10,6 @@ export default function TodoItem({ todoItem, deleteTodo }) {
   const [date, setDate] = useState(todoItem.date);
   const [priority, setPriority] = useState(todoItem.priority);
   const [displayPropertyDiv, setDisplayProperty] = useState(false);
-  const id = todoItem.id;
 
   // methods
   function toggleDisplay(e) {
