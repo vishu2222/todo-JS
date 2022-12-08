@@ -30,7 +30,7 @@ export default function App() {
       <div id="todoContainer">
         <div className="itemDiv">
           {todos.map((item, index) => {
-            return <TodoItem key={index} item={item} />;
+            return <TodoItem key={index} todoItem={item} />;
           })}
         </div>
       </div>
