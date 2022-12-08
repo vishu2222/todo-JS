@@ -36,6 +36,31 @@ root.render(element);
         return <button className={kind} {...others} />
     }
 
+* passing state and handler’s as props (“lifting state up”)
+//
+export default function MyApp() {
+  const [count, setCount] = useState(0);
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <h1>Counters that update together</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
+  );
+}
+//
+function MyButton({ count, onClick }) {
+  return (
+    <button onClick={onClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+
 //............................
 // composing components:                          // helps reusing components
 function Welcome (props) {
@@ -94,6 +119,11 @@ The useState Hook provides those two things:
 when state is updated it isnt updated unless its rendered. so clicking the above button incremets only by 1.
 This happens because every setNumber call sees its initial state value = 0
 
+//..............................................................
+Hookes:
+* Hookes can only be called at the top-level of a component.(dont use inside loops and conditions)
+
+
 
 
 // https://www.knowledgehut.com/blog/web-development/introduction-to-hooks-in-react
@@ -112,6 +142,19 @@ export default function getTodos () {
     })
     return data
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // MOUNTING: in earlier class components way
@@ -148,3 +191,48 @@ API calls within this method.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+export default function App() {
+  const [todos, setTodos] = useState(
+    JSON.parse(window.localStorage.getItem("todosarr"))
+  );
+
+  // methods
+  function addTodoTxt(txt) {
+    const todoId = todos.reduce((max, todo) => {
+      if (todo.id > max) {
+        max = todo.id;
+      }
+      return max + 1;
+    }, 0);
+
+    // const newTodsArr = [...todos, { id: todoId, txt: txt }];
+    // console.log("...........", [...todos, { id: todoId, txt: txt }]);
+    // window.localStorage.setItem("todosarr", JSON.stringify(newTodsArr));
+    // setTodos(JSON.parse(window.localStorage.getItem("todosarr")));
+  }
+
+  // component return
+  return (
+    <div>
+      <TodoForm todoTxt={addTodoTxt} />
+      <div id="todoContainer">
+        <div className="itemDiv">
+          {todos.map((item, index) => {
+            return <TodoItem key={index} item={item} />;
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
