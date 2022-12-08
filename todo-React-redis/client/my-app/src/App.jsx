@@ -4,8 +4,8 @@ import TodoItem from "./components/TodoItem.jsx";
 import { useState } from "react";
 
 export default function App() {
-  const [todos, setTodos] = useState(
-    JSON.parse(window.localStorage.getItem("todosarr"))
+  const [todos, setTods] = useState(
+    JSON.parse(window.localStorage.getItem("todosArr"))
   );
 
   // methods
@@ -16,9 +16,11 @@ export default function App() {
       }
       return max + 1;
     }, 0);
-    todos.push({ id: todoId, txt: txt });
-    window.localStorage.setItem("todosarr", JSON.stringify(todos));
-    console.log(todos);
+    window.localStorage.setItem(
+      "todosArr",
+      JSON.stringify([...todos, { id: todoId, txt: txt }])
+    );
+    setTods(JSON.parse(window.localStorage.getItem("todosArr")));
   }
 
   // component return
