@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./TodoItem.css";
 
-export default function TodoItem({ item }) {
+export default function TodoItem({ todoItem }) {
   // useState
-  const [txt, setTxt] = useState(item.txt);
-  const [checkbox, setCheckbox] = useState(item.checkbox);
-  const [notes, setNotes] = useState(item.notes);
-  const [date, setDate] = useState(item.date);
-  const [priority, setPriority] = useState(item.priority);
+  const [txt, setTxt] = useState(todoItem.txt);
+  const [checkbox, setCheckbox] = useState(todoItem.checkbox);
+  const [notes, setNotes] = useState(todoItem.notes);
+  const [date, setDate] = useState(todoItem.date);
+  const [priority, setPriority] = useState(todoItem.priority);
   const [displayPropertyDiv, setDisplayProperty] = useState(false);
 
   // methods
@@ -17,7 +17,7 @@ export default function TodoItem({ item }) {
     }
   }
 
-  // react component return
+  // component return
   return (
     <div className="todoItem" onClick={toggleDisplay}>
       <div className="txtDiv">
