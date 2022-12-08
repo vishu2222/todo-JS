@@ -1,14 +1,22 @@
 import "./App.css";
 import TodoForm from "./components/TodoForm.jsx";
 import TodoItem from "./components/TodoItem.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [todos, setTods] = useState(
-    JSON.parse(window.localStorage.getItem("todosArr"))
+    JSON.parse(window.localStorage.getItem("todos"))
   );
 
   // methods
+  function fetchTodos() {
+    setTods(JSON.parse(window.localStorage.getItem("todos")));
+  }
+
+  useEffect(() => {
+    console.log("todos on updation", todos);
+  }, [todos]);
+
   function addTodoTxt(txt) {
     const todoId = todos.reduce((max, todo) => {
       if (todo.id > max) {
@@ -17,19 +25,15 @@ export default function App() {
       return max + 1;
     }, 0);
 
-    window.localStorage.setItem(
-      "todosArr",
-      JSON.stringify([...todos, { id: todoId, txt: txt }])
-    );
-
-    setTods(JSON.parse(window.localStorage.getItem("todosArr")));
+    const newTodos = JSON.stringify([...todos, { id: todoId, txt: txt }]);
+    window.localStorage.setItem("todos", newTodos);
+    fetchTodos();
   }
 
   function deleteTodo(id) {
-    console.log(id);
     const newTods = todos.filter((todo) => todo.id !== id);
-    window.localStorage.setItem("todosArr", JSON.stringify(newTods));
-    setTods(newTods);
+    window.localStorage.setItem("todos", JSON.stringify(newTods));
+    fetchTodos();
   }
 
   // component return
@@ -40,7 +44,7 @@ export default function App() {
         <div className="itemDiv">
           {todos.map((item, index) => {
             return (
-              <TodoItem key={index} todoItem={item} deleteTodo={deleteTodo} />
+              <TodoItem key={item.id} todoItem={item} deleteTodo={deleteTodo} />
             );
           })}
         </div>
