@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./TodoItem.css";
 
-export default function TodoItem({ todoItem }) {
+export default function TodoItem({ todoItem, deleteTodo }) {
   // useState
   const [txt, setTxt] = useState(todoItem.txt);
   const [checkbox, setCheckbox] = useState(todoItem.checkbox);
@@ -9,12 +9,19 @@ export default function TodoItem({ todoItem }) {
   const [date, setDate] = useState(todoItem.date);
   const [priority, setPriority] = useState(todoItem.priority);
   const [displayPropertyDiv, setDisplayProperty] = useState(false);
+  const id = todoItem.id;
 
   // methods
   function toggleDisplay(e) {
     if (e.target.tagName === "DIV") {
       setDisplayProperty(!displayPropertyDiv);
     }
+  }
+
+  // function update() {}
+
+  function delTodo() {
+    deleteTodo(id);
   }
 
   // component return
@@ -62,7 +69,7 @@ export default function TodoItem({ todoItem }) {
             <option>Medium</option>
             <option>High</option>
           </select>
-          <button>Delete</button>
+          <button onClick={delTodo}>Delete</button>
         </div>
       )}
     </div>
