@@ -87,7 +87,7 @@ why state is needed? // https://beta.reactjs.org/learn/state-a-components-memory
    again with new data.
 
 To update a component with new data we need two things to happen
-1) Retain data between data.
+1) Retain data between rerenders.
 2) Trigger re-render with new data.
 
 The useState Hook provides those two things:
@@ -101,7 +101,6 @@ The useState Hook provides those two things:
 * state is similar to props but it is private and fully controlled by a component
 * The state is a built-in react object used to contain data about the component
 * a change in state re-renders the component. State modifies with user actions, event-listeners etc.
-* this.setState() can change value of state object.
 * state is isolated and private for a component. rendering it at two places gets copies of state
 * State is not tied to a particular function call or a place in the code, but it’s “local” to 
   the specific place on the screen.
@@ -111,11 +110,13 @@ The useState Hook provides those two things:
 * React does not touch the DOM if the rendering result is the same as last time.
 * A state variable’s value never changes within a render, even if its event handler’s code is asynchronous. 
   i.e., state cant be remodified again and again before a render
+
 <button onClick={() => {
   setNumber(number + 1);
   setNumber(number + 1);
   setNumber(number + 1);
   }}>+3</button>
+  
 when state is updated it isnt updated unless its rendered. so clicking the above button incremets only by 1.
 This happens because every setNumber call sees its initial state value = 0
 
@@ -124,10 +125,16 @@ Hookes:
 * Hookes can only be called at the top-level of a component.(dont use inside loops and conditions)
 
 
+useEffect:
 
+When React renders our component, it will remember the effect we used, and then run our effect after updating the DOM
+
+
+
+*
 
 // https://www.knowledgehut.com/blog/web-development/introduction-to-hooks-in-react
-useEffect:
+
 *  The Effect Hook adds the ability to perform side effects from a functional component.
 *  useEffect(() => { // Do some task here  }); 
 *  By calling this hook we are simply telling our component to perform some tasks after a render like
