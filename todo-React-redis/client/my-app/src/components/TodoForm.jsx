@@ -1,19 +1,19 @@
 import { useState } from "react";
 import "./TodoForm.css";
 
-function TodoForm({ todoTxt }) {
+function TodoForm({ addTodoProp }) {
   // state
   let [todoInput, setTodoInput] = useState("");
 
-  // callback methods
+  // methods
   function addTodo() {
     if (todoInput.length > 0) {
-      todoTxt(todoInput);
+      addTodoProp(todoInput);
       setTodoInput("");
     }
   }
 
-  // return
+  // component return
   return (
     <div id="todoForm">
       <form onSubmit={(e) => e.preventDefault()}>
