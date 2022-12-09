@@ -1,15 +1,15 @@
-import { useState } from "react";
-import "./TodoForm.css";
+import { useState } from 'react';
+import './TodoForm.css';
 
 function TodoForm({ addTodoProp }) {
   // state
-  let [todoInput, setTodoInput] = useState("");
+  let [todoInput, setTodoInput] = useState('');
 
   // methods
   function addTodo() {
     if (todoInput.length > 0) {
       addTodoProp(todoInput);
-      setTodoInput("");
+      setTodoInput('');
     }
   }
 
