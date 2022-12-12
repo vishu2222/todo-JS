@@ -1,5 +1,99 @@
+
+Redis is an open-source, in-memory key-value data store for use as a database, cache, message broker, and queue. // https://medium.com/geekculture/using-redis-to-cache-data-in-nodejs-and-expressjs-server-f6a7596dd77e
+// https://www.tutorialspoint.com/redis/redis_quick_guide.htm
+
 sudo snap install redis
 sudo apt install redis-tools
+sudo snap install redis-desktop-manager
 
 redis-cli // enter ------------->     127.0.0.1:6379>
 127.0.0.1:6379> ping      ---> PONG
+INFO // gives info
+
+
+*   set mykey somevalue 
+*   get mykey
+
+// ask SET to fail if the key already exists, or the opposite
+*   set mykey newval nx
+*   set mykey newval xx
+
+// atomic increment:
+*   set counter 100
+*   incr counter
+
+// set or get multiple keys
+*   mset a 10 b 20 c 30
+*   mget a b c
+
+// exists? and delete
+*   set mykey hello     // ok
+*   exists mykey        // (integer) 1
+*   del mykey           // (integer) 1
+*   exists mykey        // (integer) 0
+
+// type
+*   set mykey x         // ok
+*   type mykey          // string
+*   del mykey           // (integer) 1
+*   type mykey          // none
+
+// Key expiration
+*   set key some-value  // ok
+*   expire key 5        // (integer) 1
+*   get key             // "some-value" (immediately)
+*   get key             // (nil) (after some time)
+*   set key 100 ex 10   // sets key with string value 100 and 10sec expiration
+
+
+
+
+
+// https://www.tutorialspoint.com/redis/redis_strings.htm
+// Redis Lists
+*   rpush mylist A      // (integer) 1 The LPUSH command adds a new element into a list, on the left (at the head), while the RPUSH command adds a new element into a list, on the right (at the tail). Finally the LRANGE command extracts ranges of elements from lists:
+*   rpush mylist B      // (integer) 2
+*   lpush mylist first  // (integer) 3
+*   lrange mylist 0 -1  // 1) "first" 2) "A" 3) "B"
+*   rpush mylist 1 2 3 4 5 "foo bar" // (integer) 9
+
+
+
+
+// Sets: Sets are an unordered collection of strings.
+*   sadd myset 'val1'
+*   sadd myset 'val2'
+*   sadd myset 'val2'
+*   smembers myset  // 1) val1 2) val2
+
+
+// keys
+*   SET key value       // set value to a key
+*	DEL key             // delete key if exists
+*   EXISTS key          // checks if a key exists or not
+*   RENAME key newkey
+* 	TYPE key
+
+// Strings Commands
+*   SET key value
+*   GET key             // gets value of key
+* 	MGET                // Gets the values of all the given keys
+*   INCR key            // Increments the integer value of a key by one
+*   APPEND key value    // Appends a value to a key
+
+
+// Hashes: Redis hash is a collection of key value pairs
+*   HMSET id:1 txt 'todo1' priority 'Low'
+*   HGETALL id:1
+
+*   HGET key field      // Gets the value of a hash field stored at the specified key.
+*   HMSET key field1 value1
+*	HDEL key field      // Deletes one or more hash fields.
+*   HEXISTS key field   // Determines whether a hash field exists or not.
+
+// Lists: Lists are simply lists of strings
+*   lpush listName 'value1'
+*   lpush listName 'value2'
+
+*   rpush mylist a b c  // (integer) 3
+*   rpop mylist         // "c"
