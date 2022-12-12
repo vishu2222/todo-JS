@@ -57,7 +57,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             setTxt(e.target.value);
             updateHandler('txt', e.target.value);
           }}
-          style={{ width: (txt.length + 3) * 7.5 + 'px', textDecoration: textDecor() }}
+          style={{ width: (txt.length + 1) * 7.5 + 'px', textDecoration: textDecor() }}
         />
       </div>
 
