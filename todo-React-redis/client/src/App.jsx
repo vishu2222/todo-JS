@@ -2,7 +2,8 @@ import "./App.css";
 import TodoForm from "./components/TodoForm.jsx";
 import TodoItem from "./components/TodoItem.jsx";
 import { useState, useEffect } from "react";
-import { fetchTodos, addTodo_request } from "./requests.js";
+import { fetchTodos, addTodo_request, updateTodo_request } from "./requests.js";
+import { deleteTodo_request } from "./requests.js";
 
 export default function App() {
   // state
@@ -21,21 +22,14 @@ export default function App() {
     setTodos(await fetchTodos());
   }
 
-  function deleteTodo(id) {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-    window.localStorage.setItem("todos", JSON.stringify(newTodos));
-    fetchTodos();
+  async function deleteTodo(id) {
+    await deleteTodo_request(id);
+    setTodos(await fetchTodos());
   }
 
-  function updateTodo(id, property, value) {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo[`${property}`] = value;
-        return todo;
-      } else return todo;
-    });
-    window.localStorage.setItem("todos", JSON.stringify(newTodos));
-    fetchTodos();
+  async function updateTodo(id, property, value) {
+    await updateTodo_request(id, property, value);
+    setTodos(await fetchTodos());
   }
 
   // useEffect
