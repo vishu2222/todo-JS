@@ -19,12 +19,29 @@ export async function getTodos() {
         const todoValues = Object.values(data)
         const todos = todoValues.map(todo => JSON.parse(todo))
         return todos
-    } catch (e) { console.log(e); throw Error }
+    } catch (err) { console.log('db error:', err); throw Error }
 }
 
 export async function insertTodo(todo) {
-    await client.incr('counter')
-    const newId = await client.get('counter')
-    const newTodo = { id: newId, ...todo }
-    client.hSet('todosHashKey', newId, JSON.stringify(newTodo))
+    try {
+        await client.incr('counter')
+        const newId = await client.get('counter')
+        const newTodo = { id: newId, ...todo }
+        return await client.hSet('todosHashKey', newId, JSON.stringify(newTodo))
+    } catch (err) { console.log('db err:', err) }
+}
+
+export async function updateTodo(id, property, value) {
+    try {
+        const data = await client.hGet('todosHashKey', id)
+        const todo = JSON.parse(data)
+        todo[`${property}`] = value
+        return await client.hSet('todosHashKey', id, JSON.stringify(todo))
+    } catch (err) { console.log('db err', err) }
+}
+
+export async function deleteTodo(id) {
+    try {
+        return await client.hDel('todosHashKey', id)
+    } catch (err) { console.log('db err', err) }
 }

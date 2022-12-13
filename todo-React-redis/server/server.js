@@ -1,5 +1,5 @@
 import express from "express";
-import { connectRedis, getTodos, insertTodo } from './db.js'
+import { connectRedis, getTodos, insertTodo, updateTodo, deleteTodo } from './db.js'
 import cors from 'cors'
 
 const app = express()
@@ -27,6 +27,28 @@ app.post('/', async (req, res) => {
         res.sendStatus(500)
     }
 })
+
+app.patch('/:id', async (req, res) => {
+    try {
+        await updateTodo(req.params.id, req.body.property, req.body.value)
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500)
+    }
+})
+
+app.delete('/:id', async (req, res) => {
+    try {
+        await deleteTodo(req.params.id)
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
+})
+
+
 
 app.listen(3003, () => {
     console.log('Express server is live:')
