@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './TodoItem.css';
+import { useState } from "react";
+import "./TodoItem.css";
 
 export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
   const id = todoItem.id;
@@ -13,7 +13,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
 
   // methods
   function toggleDisplay(e) {
-    if (e.target.tagName === 'DIV') {
+    if (e.target.tagName === "DIV") {
       setDisplayProperty(!displayPropertyDiv);
     }
   }
@@ -27,26 +27,30 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
   }
 
   function setBorderColor() {
-    if (priority === 'Low') return 'groove green';
-    if (priority === 'Medium') return 'groove orange';
-    if (priority === 'High') return 'groove red';
+    if (priority === "Low") return "groove green";
+    if (priority === "Medium") return "groove orange";
+    if (priority === "High") return "groove red";
   }
 
   function textDecor() {
-    if (checkbox === true) return 'line-through';
-    return 'none';
+    if (checkbox === true) return "line-through";
+    return "none";
   }
 
   // component return
   return (
-    <div className="todoItem" onClick={toggleDisplay} style={{ border: setBorderColor() }}>
+    <div
+      className="todoItem"
+      onClick={toggleDisplay}
+      style={{ border: setBorderColor() }}
+    >
       <div className="txtDiv">
         <input
           type="checkbox"
           checked={checkbox}
           onChange={(e) => {
             setCheckbox(e.target.checked);
-            updateHandler('checkbox', e.target.checked);
+            updateHandler("checkbox", e.target.checked);
           }}
         />
         <input
@@ -55,9 +59,12 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
           value={txt}
           onChange={(e) => {
             setTxt(e.target.value);
-            updateHandler('txt', e.target.value);
+            updateHandler("txt", e.target.value);
           }}
-          style={{ width: (txt.length + 1) * 7.5 + 'px', textDecoration: textDecor() }}
+          style={{
+            width: (txt.length + 1) * 7.5 + "px",
+            textDecoration: textDecor(),
+          }}
         />
       </div>
 
@@ -70,7 +77,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             value={notes}
             onChange={(e) => {
               setNotes(e.target.value);
-              updateHandler('notes', e.target.value);
+              updateHandler("notes", e.target.value);
             }}
           />
           <label className="dateLabel">Due Date</label>
@@ -80,7 +87,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
-              updateHandler('date', e.target.value);
+              updateHandler("date", e.target.value);
             }}
           />
           <label className="priorityLabel">Priority</label>
@@ -89,7 +96,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             value={priority}
             onChange={(e) => {
               setPriority(e.target.value);
-              updateHandler('priority', e.target.value);
+              updateHandler("priority", e.target.value);
             }}
           >
             <option>None</option>
