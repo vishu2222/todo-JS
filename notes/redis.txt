@@ -97,3 +97,33 @@ INFO // gives info
 
 *   rpush mylist a b c  // (integer) 3
 *   rpop mylist         // "c"
+
+
+
+
+
+
+
+// node redis
+https://redis.js.org/#node-redis-usage-basic-example
+
+
+
+flushall // remove all 
+
+
+// hset name key val
+hset todos 1 todo1              // set
+hset todos 2 todo2 
+hget todos 1                    // get
+hgetall todos                   // getAll
+hdel todos 2                    // del
+
+
+//
+
+Redis data-types:
+* strings, lists, sets, sorted sets, hashes, bitmaps, hyperlogs, Geospatial indices
+
+features: 
+* No schema, 110000 sets per second, 81000 gets per second, supports various data-types, catching and disk-persistence
