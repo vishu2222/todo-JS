@@ -18,23 +18,10 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
     }
   }
 
-  function updateHandler(property, value) {
-    updateTodo(id, property, value);
-  }
-
-  function deleteHandler() {
-    deleteTodo(id);
-  }
-
   function setBorderColor() {
     if (priority === "Low") return "groove green";
     if (priority === "Medium") return "groove orange";
     if (priority === "High") return "groove red";
-  }
-
-  function textDecor() {
-    if (checkbox === true) return "line-through";
-    return "none";
   }
 
   // component return
@@ -50,7 +37,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
           checked={checkbox}
           onChange={(e) => {
             setCheckbox(e.target.checked);
-            updateHandler("checkbox", e.target.checked);
+            updateTodo(id, "checkbox", e.target.checked);
           }}
         />
         <input
@@ -59,11 +46,11 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
           value={txt}
           onChange={(e) => {
             setTxt(e.target.value);
-            updateHandler("txt", e.target.value);
+            updateTodo(id, "txt", e.target.value);
           }}
           style={{
             width: (txt.length + 1) * 7.5 + "px",
-            textDecoration: textDecor(),
+            textDecoration: checkbox ? "line-through" : "none",
           }}
         />
       </div>
@@ -77,7 +64,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             value={notes}
             onChange={(e) => {
               setNotes(e.target.value);
-              updateHandler("notes", e.target.value);
+              updateTodo(id, "notes", e.target.value);
             }}
           />
           <label className="dateLabel">Due Date</label>
@@ -87,7 +74,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
-              updateHandler("date", e.target.value);
+              updateTodo(id, "date", e.target.value);
             }}
           />
           <label className="priorityLabel">Priority</label>
@@ -96,7 +83,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             value={priority}
             onChange={(e) => {
               setPriority(e.target.value);
-              updateHandler("priority", e.target.value);
+              updateTodo(id, "priority", e.target.value);
             }}
           >
             <option>None</option>
@@ -104,7 +91,13 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             <option>Medium</option>
             <option>High</option>
           </select>
-          <button onClick={deleteHandler}>Delete</button>
+          <button
+            onClick={() => {
+              deleteTodo(id);
+            }}
+          >
+            Delete
+          </button>
         </div>
       )}
     </div>
