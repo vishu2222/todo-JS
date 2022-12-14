@@ -24,7 +24,15 @@ export async function updateTodo_request(id, property, value) {
 }
 
 export async function deleteTodo_request(id) {
-    await fetch(url + id, {
+    await fetch(url + 'delete/' + id, {
         method: "DELETE"
     })
 }
+
+export async function deleteCompleted_request() {
+    await fetch(url + "delDone", {
+        method: "DELETE"
+    })
+}
+
+// export async function del
