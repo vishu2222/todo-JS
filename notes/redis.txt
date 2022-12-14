@@ -120,6 +120,11 @@ hgetall todos                   // getAll
 hdel todos 2                    // del
 
 
+// 
+https://redis.io/commands/hdel/
+https://redis.io/commands/hget/
+https://www.w3resource.com/redis/redis-hset-key-field-value.php
+
 //
 
 Redis data-types:
