@@ -1,5 +1,5 @@
 import express from "express";
-import { connectRedis, getTodos, insertTodo, updateTodo, deleteTodo } from './db.js'
+import { connectRedis, getTodos, insertTodo, updateTodo, deleteTodo, delDone } from './db.js'
 import cors from 'cors'
 
 const app = express()
@@ -38,7 +38,7 @@ app.patch('/:id', async (req, res) => {
     }
 })
 
-app.delete('/:id', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
     try {
         await deleteTodo(req.params.id)
         res.sendStatus(200)
@@ -48,6 +48,10 @@ app.delete('/:id', async (req, res) => {
     }
 })
 
+app.delete('/delDone', async (req, res) => {
+    delDone()
+    res.json('recieved the del request')
+})
 
 
 app.listen(3003, () => {
