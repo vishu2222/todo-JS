@@ -95,6 +95,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
             onClick={() => {
               deleteTodo(id);
             }}
+            className="deleteButton"
           >
             Delete
           </button>
