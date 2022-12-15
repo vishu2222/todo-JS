@@ -9,7 +9,7 @@ import { deleteTodo_request, deleteCompleted_request } from "./requests.js";
 export default function App() {
   // state
   const [todos, setTodos] = useState([]);
-  const [showOption, setShowOption] = useState("Show All");
+  const [filterOption, setFilterOption] = useState("Show All");
 
   // methods
   async function addTodo(txt) {
@@ -39,8 +39,10 @@ export default function App() {
     setTodos(await fetchTodos());
   }
 
-  function showOptions(option) {
-    setShowOption(option);
+  function switchRender(status) {
+    if (filterOption === "Show Completed") return status;
+    if (filterOption === "Show pending") return !status;
+    return true;
   }
 
   // useEffect
@@ -55,31 +57,9 @@ export default function App() {
       <TodoForm addTodoProp={addTodo} />
       <div id="todoContainer">
         <div className="itemDiv">
-          {todos.map((item) => {
-            if (showOption === "Show All") {
-              return (
-                <TodoItem
-                  key={item.id}
-                  todoItem={item}
-                  deleteTodo={deleteTodo}
-                  updateTodo={updateTodo}
-                />
-              );
-            }
-            if (showOption === "Show Completed") {
-              return (
-                item.checkbox && (
-                  <TodoItem
-                    key={item.id}
-                    todoItem={item}
-                    deleteTodo={deleteTodo}
-                    updateTodo={updateTodo}
-                  />
-                )
-              );
-            }
-            return (
-              !item.checkbox && (
+          {todos.map(
+            (item) =>
+              switchRender(item.checkbox) && (
                 <TodoItem
                   key={item.id}
                   todoItem={item}
@@ -87,11 +67,13 @@ export default function App() {
                   updateTodo={updateTodo}
                 />
               )
-            );
-          })}
+          )}
         </div>
       </div>
-      <TodoFooter showOptions={showOptions} deleteCompleted={deleteCompleted} />
+      <TodoFooter
+        showOptions={setFilterOption}
+        deleteCompleted={deleteCompleted}
+      />
     </div>
   );
 }
