@@ -29,7 +29,7 @@ export default function TodoItem({ todoItem, deleteTodo, updateTodo }) {
     <div
       className="todoItem"
       onClick={toggleDisplay}
-      style={{ border: setBorderColor() }}
+      style={{ "border-left": setBorderColor() }}
     >
       <div className="txtDiv">
         <input
