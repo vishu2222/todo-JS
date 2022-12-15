@@ -7,7 +7,11 @@
 .txtDiv {
     padding-top: 5px;
     padding-bottom: 5px;
-    
+}
+
+.txtDiv:hover {
+    border:groove; /* ridge */
+    border-radius: 8px;
 }
 
 .todoTxt-TodoItem {
@@ -49,4 +53,8 @@
     position: relative;
     bottom: 130px;
     left: 45px;
+}
+
+.deleteButton:hover{
+    background-color: #EB455F;
 }
