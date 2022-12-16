@@ -1,0 +1,8 @@
+.footer{
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.delCompleted:hover{
+    background-color: #EB6440;
+}
