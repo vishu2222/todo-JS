@@ -49,8 +49,12 @@ app.delete('/delete/:id', async (req, res) => {
 })
 
 app.delete('/delDone', async (req, res) => {
-    delDone()
-    res.json('recieved the del request')
+    try {
+        delDone()
+        res.sendStatus(200)
+    } catch (err) {
+        res.sendStatus(500)
+    }
 })
 
 
