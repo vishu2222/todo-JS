@@ -34,5 +34,3 @@ export async function deleteCompleted_request() {
         method: "DELETE"
     })
 }
-
-// export async function del
