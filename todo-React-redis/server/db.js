@@ -46,9 +46,11 @@ export async function deleteTodo(id) {
 }
 
 export async function delDone() {
-    const data = await client.hGetAll('todosHashKey')
-    const todoValues = Object.values(data)
-    const completedTodos = todoValues.map(todo => JSON.parse(todo)).filter(todo => todo.checkbox === true)
-    const keys = completedTodos.map(todo => todo.id)
-    keys.forEach(async (key) => await client.hDel('todosHashKey', key))
+    try {
+        const data = await client.hGetAll('todosHashKey')
+        const todoValues = Object.values(data)
+        const completedTodos = todoValues.map(todo => JSON.parse(todo)).filter(todo => todo.checkbox === true)
+        const keys = completedTodos.map(todo => todo.id)
+        keys.forEach(async (key) => await client.hDel('todosHashKey', key))
+    } catch (err) { console.log('db err', err); throw Error }
 }
