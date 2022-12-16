@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./TodoFooter.css";
 
 export default function TodoFooter({ showOptions, deleteCompleted }) {
   const [buttonName, setButtonName] = useState("Show Completed");
@@ -11,11 +12,13 @@ export default function TodoFooter({ showOptions, deleteCompleted }) {
   }
 
   return (
-    <div>
+    <div className="footer">
       <button onClick={(e) => handleClick(e.target.textContent)}>
         {buttonName}
       </button>
-      <button onClick={deleteCompleted}>DeleteCompleted</button>
+      <button className="delCompleted" onClick={deleteCompleted}>
+        DeleteCompleted
+      </button>
     </div>
   );
 }
