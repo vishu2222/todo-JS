@@ -39,9 +39,9 @@ export default function App() {
     setTodos(await fetchTodos());
   }
 
-  function switchRender(status) {
-    if (filterOption === "Show Completed") return status;
-    if (filterOption === "Show pending") return !status;
+  function switchRender(checkboxStatus) {
+    if (filterOption === "Show Completed") return checkboxStatus;
+    if (filterOption === "Show pending") return !checkboxStatus;
     return true;
   }
 
