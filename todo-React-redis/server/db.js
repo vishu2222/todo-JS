@@ -9,8 +9,7 @@ export async function connectRedis() {
     try {
         await client.connect()
         console.log('Redis Client Connected:')
-        client.on('error', (err) => console.log('Redis Client Error', err));
-    } catch (err) { console.log('Redis Client Connection Error:', err) }
+    } catch (err) { console.log('Redis Client Connection Error:', err); throw Error } // client.on('error', (err) => console.log('Redis Client Error', err));
 }
 
 export async function getTodos() {
@@ -28,7 +27,7 @@ export async function insertTodo(todo) {
         const newId = await client.get('counter')
         const newTodo = { id: newId, ...todo }
         return await client.hSet('todosHashKey', newId, JSON.stringify(newTodo))
-    } catch (err) { console.log('db err:', err) }
+    } catch (err) { console.log('db err:', err); throw Error }
 }
 
 export async function updateTodo(id, property, value) {
@@ -37,13 +36,13 @@ export async function updateTodo(id, property, value) {
         const todo = JSON.parse(data)
         todo[`${property}`] = value
         return await client.hSet('todosHashKey', id, JSON.stringify(todo))
-    } catch (err) { console.log('db err', err) }
+    } catch (err) { console.log('db err', err); throw Error }
 }
 
 export async function deleteTodo(id) {
     try {
         return await client.hDel('todosHashKey', id)
-    } catch (err) { console.log('db err', err) }
+    } catch (err) { console.log('db err', err); throw Error }
 }
 
 export async function delDone() {
