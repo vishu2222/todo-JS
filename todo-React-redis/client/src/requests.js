@@ -1,13 +1,13 @@
 
 const url = 'http://localhost:3003/'
 
-export async function fetchTodos() {
+async function fetchTodos() {
     const res = await fetch(url)
     const todos = await res.json()
     return todos
 }
 
-export async function addTodo_request(newTodo) {
+async function addTodo(newTodo) {
     await fetch(url, {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -15,7 +15,7 @@ export async function addTodo_request(newTodo) {
     });
 }
 
-export async function updateTodo_request(id, property, value) {
+async function updateTodo(id, property, value) {
     await fetch(url + id, {
         headers: { "Content-Type": "application/json" },
         method: "PATCH",
@@ -23,14 +23,23 @@ export async function updateTodo_request(id, property, value) {
     })
 }
 
-export async function deleteTodo_request(id) {
+async function deleteTodo(id) {
     await fetch(url + 'delete/' + id, {
         method: "DELETE"
     })
 }
 
-export async function deleteCompleted_request() {
+async function deleteCompleted() {
     await fetch(url + "delDone", {
         method: "DELETE"
     })
 }
+
+const reqs = {
+    fetchTodos: fetchTodos,
+    addTodo: addTodo,
+    updateTodo: updateTodo,
+    deleteTodo: deleteTodo,
+    deleteCompleted: deleteCompleted
+}
+export default reqs
