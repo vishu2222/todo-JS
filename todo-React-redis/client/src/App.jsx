@@ -3,8 +3,7 @@ import TodoForm from "./components/TodoForm.jsx";
 import TodoItem from "./components/TodoItem.jsx";
 import TodoFooter from "./components/TodoFooter";
 import { useState, useEffect } from "react";
-import { fetchTodos, addTodo_request, updateTodo_request } from "./requests.js";
-import { deleteTodo_request, deleteCompleted_request } from "./requests.js";
+import reqs from "./requests.js";
 
 export default function App() {
   // state
@@ -20,26 +19,26 @@ export default function App() {
       notes: "",
       priority: "",
     };
-    await addTodo_request(newTodo);
-    setTodos(await fetchTodos());
+    await reqs.addTodo(newTodo);
+    setTodos(await reqs.fetchTodos());
   }
 
   async function deleteTodo(id) {
-    await deleteTodo_request(id);
-    setTodos(await fetchTodos());
+    await reqs.deleteTodo(id);
+    setTodos(await reqs.fetchTodos());
   }
 
   async function updateTodo(id, property, value) {
-    await updateTodo_request(id, property, value);
-    setTodos(await fetchTodos());
+    await reqs.updateTodo(id, property, value);
+    setTodos(await reqs.fetchTodos());
   }
 
   async function deleteCompleted() {
-    await deleteCompleted_request();
-    setTodos(await fetchTodos());
+    await reqs.deleteCompleted();
+    setTodos(await reqs.fetchTodos());
   }
 
-  function switchRender(checkboxStatus) {
+  function filterRender(checkboxStatus) {
     if (filterOption === "Show Completed") return checkboxStatus;
     if (filterOption === "Show pending") return !checkboxStatus;
     return true;
@@ -47,7 +46,7 @@ export default function App() {
 
   // useEffect
   useEffect(() => {
-    fetchTodos().then((data) => {
+    reqs.fetchTodos().then((data) => {
       setTodos(data);
     });
   }, []);
@@ -59,7 +58,7 @@ export default function App() {
         <div className="itemDiv">
           {todos.map(
             (item) =>
-              switchRender(item.checkbox) && (
+              filterRender(item.checkbox) && (
                 <TodoItem
                   key={item.id}
                   todoItem={item}
