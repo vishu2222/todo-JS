@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h4>default layout</h4>
+        <div class="blueBox box" id="blue1"></div>
+        <div class="redBox box" id="red1"></div>
+        <div class="yellowBox box" id="yellow1"></div>
+        <div class="greenBox box" id="green1"></div>
+        <br>
+        <!--  -->
+        <h1>Flex:</h1>
+        <p>felx prevents overflow by dynamically expanding or shrinking item inside flex container</p>
+        <h4>start by setting display of an element as flex. Flex applies to every element inside that element</h4>
+        <!--  -->
+        <h3>justify-content:</h3>
+        <p>justify-content property aligns items horizontally:</p>
+        <p><strong>options</strong></p>
+        <ol>
+            <li><strong>flex-start:</strong> Items align to the left side of the container.flex-start is the default</li> 
+            <li><strong>flex-end:</strong> Items align to the right side of the container.</li>
+            <li><strong>center:</strong> Items align at the center of the container.</li>
+            <br>
+            <p>The below options are not supported in some browsers</p>
+            <li><strong>space-between:</strong> Items display with equal spacing between them.</li>
+            <li><strong>space-around:</strong> Items display with equal spacing around them.</li>
+            <li><strong>space-evenly:</strong> </li>
+            <li><strong>start:</strong></li>
+            <li><strong>end:</strong></li>
+            <li><strong>left:</strong></li>
+            <li><strong>right:</strong></li>
+
+        </ol>
+    <div id="felxContainer1" class="felxContainer">    
+        <div class="blueBox box" id="blue2"></div>
+        <div class="redBox box" id="red2"></div>
+        <div class="yellowBox box" id="yellow2" ></div>
+        <div class="greenBox box" id="green2" ></div>
+        <br>
+    </div>
+    <button>space-around</button>
+    <!--  -->
+    <h3>align-items:</h3>
+        <p>align-items property aligns items vertically</p>
+        <p><strong>options</strong></p>
+        <ol>
+            <li><strong>flex-start:</strong>  Items align to the top of the container.</li>
+            <li><strong>flex-end:</strong> Items align to the bottom of the container.</li>
+            <li><strong>center: </strong>Items align at the vertical center of the container.</li>
+            <li><strong>baseline: </strong>Items display at the baseline of the container.</li>
+            <li><strong>stretch:</strong> Items are stretched to fit the container.</li>
+        </ol>
+
+        <div id="felxContainer2" class="felxContainer">    
+            <div class="blueBox box" id="blue3"></div>
+            <div class="redBox box" id="red3"></div>
+            <div class="yellowBox box" id="yellow3" ></div>
+            <div class="greenBox box" id="green3" ></div>
+            <br>
+        </div>
+        <br>
+        <!--  -->
+
+        <h3>flex-direction:</h3>
+        <p> property defines the direction items are placed in the container. 
+            flex-direction property defines in which direction the container wants to stack the flex items
+        </p>
+        <p>options</p>
+        <ol>
+            <li> <strong>row:</strong> The row value stacks the flex items horizontally (from left to right):</li>
+            <li><strong>row-reverse:</strong>Items are placed opposite to the text direction.</li>
+            <li><strong>column:</strong> Items are placed top to bottom.</li>
+            <li><strong>column-reverse:</strong> stacks the flex items vertically (but from bottom to top).</li>
+        </ol>
+        <div id="felxContainer3" class="felxContainer">    
+            <div class="blueBox box" id="blue3"></div>
+            <div class="redBox box" id="red3"></div>
+            <div class="yellowBox box" id="yellow3" ></div>
+            <div class="greenBox box" id="green3" ></div>
+            <br>
+        </div>
+
+</body>
+</html>
+
+<style>
+    body{
+        background-color: cadetblue;
+    }
+
+    .felxContainer{
+        background-color:darkcyan;
+        height: 150px;
+    }
+    #felxContainer1{
+        display: flex;
+        justify-content: space-around;      /* space-between,  space-around, center, flex-end, flex-start */
+    }
+    #felxContainer2{
+        display: flex;
+        align-items: center;  /* center, flex-start, flex-end, baseline, stretch */
+    }
+    #felxContainer3{
+        display: flex;
+        flex-direction: column-reverse; /* row, row-reverse, column , column-reverse  */
+    }
+
+    .box{
+        height: 25px;
+        width: 25px;
+    }
+    .blueBox{
+        background-color: blue;
+    }
+    .redBox{
+        background-color: red;
+    }
+    .yellowBox{
+        background-color: yellow;
+    }
+    .greenBox{
+        background-color: green;
+    }    
+</style>
+
+<script>
+    
+</script>
