@@ -43,7 +43,7 @@ export async function updateTodo(id, property, value) {
     try {
         const data = await client.hGet('todos', id)
         const todo = JSON.parse(data)
-        todo[`${property}`] = value
+        todo[property] = value
         return await client.hSet('todos', id, JSON.stringify(todo))
     } catch (err) {
         console.log('db err', err);
