@@ -1,0 +1,25 @@
+body{
+  background-color: cadetblue;
+}
+
+.felxContainer{
+  background-color:darkcyan;
+  height: 150px;
+}
+
+.box{
+  height: 25px;
+  width: 25px;
+}
+.blueBox{
+  background-color: blue;
+}
+.redBox{
+  background-color: red;
+}
+.yellowBox{
+  background-color: yellow;
+}
+.greenBox{
+  background-color: green;
+}  

@@ -1,0 +1,24 @@
+#felxContainer1{
+    display: flex;
+    justify-content: space-around;      /* space-between,  space-around, center, flex-end, flex-start */
+}
+/* 
+#felxContainer1b{
+    display: flex;
+    justify-content: space-between;
+}
+
+#felxContainer1c{
+    display: flex;
+    justify-content: center;
+}
+
+#felxContainer1c{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#felxContainer1c{
+    display: flex;
+    justify-content: flex-start;
+} */
